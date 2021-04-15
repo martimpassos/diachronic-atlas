@@ -1,10 +1,12 @@
 import React from 'react'
 
-import { ExampleComponent } from 'diachronic-atlas'
+import Atlas from 'diachronic-atlas'
+
+import style from './style.json'
 import 'diachronic-atlas/dist/index.css'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return <Atlas mapStyle={style} year={1950} basemapHandler={() => {}} />
 }
 
 export default App

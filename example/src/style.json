@@ -1,0 +1,3147 @@
+{
+    "version": 8,
+    "name": "Houston-2018",
+    "center": [-95.36083536331756, 29.74519993868978],
+    "zoom": 12,
+    "bearing": 0,
+    "pitch": 0,
+    "sources": {
+        "composite": {
+            "tiles": ["https://highwaystiles.s3.amazonaws.com/base/{z}/{x}/{y}"], 
+            "type": "vector"
+        }
+    },
+    "sprite": "mapbox://sprites/axismaps/ck7garlfe3hgo1ikih7w84cu7/0ebgij4h38ap6ce5elewniqee",
+    "glyphs": "mapbox://fonts/axismaps/{fontstack}/{range}.pbf",
+    "layers": [
+        {
+            "id": "background",
+            "type": "background",
+            "layout": {},
+            "paint": {
+                "background-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    "hsl(20, 18%, 90%)",
+                    18,
+                    "hsl(20, 18%, 95%)"
+                ]
+            }
+        },
+        {
+            "id": "background-darker",
+            "type": "background",
+            "layout": {},
+            "paint": {"background-color": "hsl(20, 1%, 55%)"}
+        },
+        {
+            "id": "county-limit",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "BoundariesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2017],
+                [">=", ["get", "lastyear"], 2017],
+                ["match", ["get", "type"], ["County Limit"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    "hsl(20, 12%, 83%)",
+                    18,
+                    "hsl(20, 12%, 90%)"
+                ],
+                "fill-outline-color": "#a99b93",
+                "fill-antialias": false
+            }
+        },
+        {
+            "id": "county-limit-darker",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "BoundariesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2017],
+                [">=", ["get", "lastyear"], 2017],
+                ["match", ["get", "type"], ["County Limit"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    "hsl(20, 10%, 78%)",
+                    18,
+                    "hsl(20, 12%, 90%)"
+                ],
+                "fill-outline-color": "#a99b93",
+                "fill-antialias": false
+            }
+        },
+        {
+            "id": "county-limit copy",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "BoundariesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2017],
+                [">=", ["get", "lastyear"], 2017],
+                ["match", ["get", "type"], ["County Limit"], true, false]
+            ],
+            "layout": {"line-join": "round", "visibility": "none"},
+            "paint": {
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    9,
+                    6,
+                    18,
+                    60
+                ],
+                "line-offset": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    9,
+                    -2,
+                    18,
+                    -24
+                ],
+                "line-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    9,
+                    "hsl(22, 11%, 80%)",
+                    18,
+                    "hsl(22, 11%, 82%)"
+                ]
+            }
+        },
+        {
+            "id": "city-limit",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "BoundariesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2017],
+                [">=", ["get", "lastyear"], 8888],
+                ["match", ["get", "type"], ["City Limit"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    "hsl(22, 14%, 86%)",
+                    18,
+                    "hsl(20, 14%, 91%)"
+                ],
+                "fill-outline-color": "hsl(20, 11%, 76%)"
+            }
+        },
+        {
+            "id": "city-limit copy",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "BoundariesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2017],
+                [">=", ["get", "lastyear"], 8888],
+                ["match", ["get", "type"], ["City Limit"], true, false]
+            ],
+           
+            "paint": {
+                "line-color": "hsl(25, 12%, 60%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    9,
+                    0.5,
+                    11,
+                    1,
+                    18,
+                    10
+                ],
+                "line-offset": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    9,
+                    0.25,
+                    11,
+                    0.5,
+                    18,
+                    5
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    1,
+                    13,
+                    0.5
+                ]
+            }
+        },
+        {
+            "id": "park",
+            "type": "fill",
+            "metadata": {"mapbox:group": "e38077a02ce7f81a2e7bbd9a0de3ca81"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Park"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    "hsl(71, 20%, 74%)",
+                    18,
+                    "hsl(71, 20%, 84%)"
+                ]
+            }
+        },
+        {
+            "id": "field",
+            "type": "fill",
+            "metadata": {"mapbox:group": "e38077a02ce7f81a2e7bbd9a0de3ca81"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Field"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    "#b8cfaf",
+                    18,
+                    "#b8cfaf"
+                ]
+            }
+        },
+        {
+            "id": "university-campus",
+            "type": "fill",
+            "metadata": {"mapbox:group": "e38077a02ce7f81a2e7bbd9a0de3ca81"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["University Campus"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11.5,
+                    0,
+                    12,
+                    1
+                ],
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    "#d3cda7",
+                    18,
+                    "hsl(53, 26%, 83%)"
+                ]
+            }
+        },
+        {
+            "id": "graveyard",
+            "type": "fill",
+            "metadata": {"mapbox:group": "e38077a02ce7f81a2e7bbd9a0de3ca81"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Graveyard"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    "#c5caaf",
+                    18,
+                    "#dbdece"
+                ]
+            }
+        },
+        {
+            "id": "golf-course",
+            "type": "fill",
+            "metadata": {"mapbox:group": "e38077a02ce7f81a2e7bbd9a0de3ca81"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Golf Course"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    "hsl(104, 25%, 75%)",
+                    18,
+                    "hsl(103, 25%, 75%)"
+                ]
+            }
+        },
+        {
+            "id": "campsite",
+            "type": "fill",
+            "metadata": {"mapbox:group": "e38077a02ce7f81a2e7bbd9a0de3ca81"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Camp Site"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    "hsl(104, 25%, 75%)",
+                    18,
+                    "hsl(104, 25%, 75%)"
+                ]
+            }
+        },
+        {
+            "id": "dog-park",
+            "type": "fill",
+            "metadata": {"mapbox:group": "e38077a02ce7f81a2e7bbd9a0de3ca81"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Dog Park"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    "hsl(104, 25%, 75%)",
+                    18,
+                    "hsl(104, 25%, 75%)"
+                ]
+            }
+        },
+        {
+            "id": "ice-rink",
+            "type": "fill",
+            "metadata": {"mapbox:group": "e38077a02ce7f81a2e7bbd9a0de3ca81"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Ice Rink"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    "#afcac2",
+                    18,
+                    "hsl(162, 20%, 84%)"
+                ]
+            }
+        },
+        {
+            "id": "parking-lots",
+            "type": "fill",
+            "metadata": {"mapbox:group": "e38077a02ce7f81a2e7bbd9a0de3ca81"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Parking Lots"], true, false]
+            ],
+            "layout": {"visibility": "none"},
+            "paint": {
+                "fill-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13.5,
+                    0,
+                    14,
+                    1
+                ],
+                "fill-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    "hsl(0, 0%, 70%)",
+                    18,
+                    "hsl(0, 0%, 85%)"
+                ]
+            }
+        },
+        {
+            "id": "paved-surface",
+            "type": "fill",
+            "metadata": {"mapbox:group": "e38077a02ce7f81a2e7bbd9a0de3ca81"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Paved Surface"], true, false]
+            ],
+            "layout": {"visibility": "none"},
+            "paint": {
+                "fill-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    14,
+                    0,
+                    14.5,
+                    1
+                ],
+                "fill-color": "hsl(0, 36%, 100%)"
+            }
+        },
+        {
+            "id": "stream",
+            "type": "line",
+            "metadata": {"mapbox:group": "3f1c0a56d3060b094b27fa69e723033e"},
+            "source": "composite",
+            "source-layer": "HidrographyLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Stream"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "#a1afc9",
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    0,
+                    11.25,
+                    1
+                ],
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.9],
+                    ["zoom"],
+                    13,
+                    1,
+                    18,
+                    10
+                ]
+            }
+        },
+        {
+            "id": "bayou",
+            "type": "line",
+            "metadata": {"mapbox:group": "3f1c0a56d3060b094b27fa69e723033e"},
+            "source": "composite",
+            "source-layer": "HidrographyLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Bayou"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "#a1afc9",
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    9,
+                    0,
+                    9.25,
+                    1
+                ],
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.9],
+                    ["zoom"],
+                    9,
+                    1,
+                    18,
+                    24
+                ]
+            }
+        },
+        {
+            "id": "river",
+            "type": "line",
+            "metadata": {"mapbox:group": "3f1c0a56d3060b094b27fa69e723033e"},
+            "source": "composite",
+            "source-layer": "HidrographyLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["River"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "#a1afc9",
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    9,
+                    0,
+                    9.25,
+                    1
+                ],
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.9],
+                    ["zoom"],
+                    9,
+                    1,
+                    18,
+                    24
+                ]
+            }
+        },
+        {
+            "id": "wetland",
+            "type": "fill",
+            "metadata": {"mapbox:group": "3f1c0a56d3060b094b27fa69e723033e"},
+            "source": "composite",
+            "source-layer": "HidrographyPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Wetland"], true, false]
+            ],
+            "layout": {},
+            "paint": {"fill-color": "#a1afc9", "fill-opacity": 0.3}
+        },
+        {
+            "id": "wetland-blur",
+            "type": "line",
+            "metadata": {"mapbox:group": "3f1c0a56d3060b094b27fa69e723033e"},
+            "source": "composite",
+            "source-layer": "HidrographyPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Wetland"], true, false]
+            ],
+            "layout": {"line-join": "round"},
+            "paint": {
+                "line-blur": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    2,
+                    18,
+                    10
+                ],
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    2,
+                    18,
+                    20
+                ],
+                "line-color": "hsl(219, 27%, 71%)",
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    0,
+                    12,
+                    0.5
+                ]
+            }
+        },
+        {
+            "id": "reservoir",
+            "type": "fill",
+            "metadata": {"mapbox:group": "3f1c0a56d3060b094b27fa69e723033e"},
+            "source": "composite",
+            "source-layer": "HidrographyPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Reservoir"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "#a1afc9"
+            }
+        },
+        {
+            "id": "wetland-icon",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "3f1c0a56d3060b094b27fa69e723033e"},
+            "source": "composite",
+            "source-layer": "HidrographyPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Wetland"], true, false]
+            ],
+            "layout": {
+                "icon-image": [
+                    "step",
+                    ["zoom"],
+                    "wetland-11",
+                    13,
+                    "wetland-15"
+                ],
+                "visibility": "none"
+            },
+            "paint": {"text-color": "#46597c"}
+        },
+        {
+            "id": "drain",
+            "type": "line",
+            "metadata": {"mapbox:group": "e6cd0c9d6dbcc29fab98e29a97d47f0c"},
+            "source": "composite",
+            "source-layer": "UtilitiesLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Drain"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "#a1afc9",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.9],
+                    ["zoom"],
+                    13,
+                    1,
+                    18,
+                    10
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12.5,
+                    0,
+                    13,
+                    1
+                ],
+                "line-dasharray": [4, 4]
+            }
+        },
+        {
+            "id": "ditch",
+            "type": "line",
+            "metadata": {"mapbox:group": "e6cd0c9d6dbcc29fab98e29a97d47f0c"},
+            "source": "composite",
+            "source-layer": "UtilitiesLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Drain", "Ditch"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "#a1afc9",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.9],
+                    ["zoom"],
+                    13,
+                    1,
+                    18,
+                    10
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12.5,
+                    0,
+                    13,
+                    1
+                ],
+                "line-dasharray": [4, 4]
+            }
+        },
+        {
+            "id": "canal",
+            "type": "line",
+            "metadata": {"mapbox:group": "e6cd0c9d6dbcc29fab98e29a97d47f0c"},
+            "source": "composite",
+            "source-layer": "UtilitiesLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Canal"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "#a1afc9",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.9],
+                    ["zoom"],
+                    9,
+                    1,
+                    18,
+                    24
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    9.5,
+                    0,
+                    10,
+                    1
+                ],
+                "line-dasharray": [10, 2, 2, 2]
+            }
+        },
+        {
+            "id": "railroad",
+            "type": "line",
+            "metadata": {"mapbox:group": "e6cd0c9d6dbcc29fab98e29a97d47f0c"},
+            "source": "composite",
+            "source-layer": "UtilitiesLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Railroad"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "line-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    "hsl(0, 0%, 75%)",
+                    18,
+                    "hsl(0, 0%, 80%)"
+                ],
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    0,
+                    0.5,
+                    18,
+                    3
+                ]
+            }
+        },
+        {
+            "id": "railroad-dash",
+            "type": "line",
+            "metadata": {"mapbox:group": "e6cd0c9d6dbcc29fab98e29a97d47f0c"},
+            "source": "composite",
+            "source-layer": "UtilitiesLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Railroad"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "line-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    "hsl(0, 0%, 75%)",
+                    18,
+                    "hsl(0, 0%, 75%)"
+                ],
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    0,
+                    2,
+                    18,
+                    8
+                ],
+                "line-dasharray": [0.15, 10]
+            }
+        },
+        {
+            "id": "steps",
+            "type": "line",
+            "metadata": {"mapbox:group": "71a66e813deb3f34bc9ebf761f6f9918"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Steps"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "line-color": "#bfbfbf",
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    0,
+                    13.25,
+                    1
+                ],
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    13,
+                    1,
+                    18,
+                    8
+                ],
+                "line-dasharray": [2, 1]
+            }
+        },
+        {
+            "id": "bridleway",
+            "type": "line",
+            "metadata": {"mapbox:group": "71a66e813deb3f34bc9ebf761f6f9918"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Bridleway"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "line-color": "#c0aea5",
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    0,
+                    13.25,
+                    1
+                ],
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    13,
+                    1,
+                    18,
+                    8
+                ],
+                "line-dasharray": [2, 1]
+            }
+        },
+        {
+            "id": "cycleway",
+            "type": "line",
+            "metadata": {"mapbox:group": "71a66e813deb3f34bc9ebf761f6f9918"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Cycleway"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "line-color": "hsl(0, 0%, 100%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    13,
+                    1,
+                    18,
+                    8
+                ],
+                "line-dasharray": [2, 1],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    0,
+                    13.25,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "pedestrian",
+            "type": "line",
+            "metadata": {"mapbox:group": "71a66e813deb3f34bc9ebf761f6f9918"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Pedestrian"], true, false]
+            ],
+            "layout": {"line-cap": "round"},
+            "paint": {
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    0,
+                    13.25,
+                    1
+                ],
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    13,
+                    1,
+                    18,
+                    8
+                ],
+                "line-color": "#bfbfbf"
+            }
+        },
+        {
+            "id": "track",
+            "type": "line",
+            "metadata": {"mapbox:group": "71a66e813deb3f34bc9ebf761f6f9918"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Track"], true, false]
+            ],
+            "layout": {"line-cap": "round"},
+            "paint": {
+                "line-color": "#c0aea5",
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    0,
+                    13.25,
+                    1
+                ],
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    13,
+                    1,
+                    18,
+                    8
+                ]
+            }
+        },
+        {
+            "id": "residential-case",
+            "type": "line",
+            "metadata": {
+                "mapbox:group": "08a1b920ec22235869d8a3cc2e032162"
+            },
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                [
+                  "match",
+                  ["get", "type"],
+                  ["Residential"],
+                  true,
+                  false
+                ]
+            ],
+            "layout": {
+                "line-cap": "round",
+                "line-join": "round",
+                "visibility": "visible"
+            },
+            "paint": {
+                "line-color": "#bfbfbf",
+                "line-width": [
+                  "interpolate",
+                  ["exponential", 1.6],
+                  ["zoom"],
+                  12,
+                  1.5,
+                  18,
+                  13
+                ],
+                "line-opacity": [
+                  "interpolate",
+                  ["linear"],
+                  ["zoom"],
+                  13.5,
+                  0,
+                  17,
+                  1
+                ]
+            }
+        },
+        {
+            "id": "tertiary-case",
+            "type": "line",
+            "metadata": {"mapbox:group": "08a1b920ec22235869d8a3cc2e032162"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Tertiary"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "#bfbfbf",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    11,
+                    1.5,
+                    18,
+                    16
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11.5,
+                    0,
+                    17,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "other-case",
+            "type": "line",
+            "metadata": {"mapbox:group": "08a1b920ec22235869d8a3cc2e032162"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Other"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "#bfbfbf",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    11,
+                    1.5,
+                    18,
+                    16
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11.5,
+                    0,
+                    17,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "secondary-case",
+            "type": "line",
+            "metadata": {"mapbox:group": "08a1b920ec22235869d8a3cc2e032162"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Secondary"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "#bfbfbf",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    11,
+                    1,
+                    12,
+                    3,
+                    18,
+                    28
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10.5,
+                    0,
+                    14,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "primary-case",
+            "type": "line",
+            "metadata": {"mapbox:group": "08a1b920ec22235869d8a3cc2e032162"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Primary"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "#bfbfbf",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    11,
+                    1.5,
+                    12,
+                    4,
+                    18,
+                    40
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10.5,
+                    0,
+                    14,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "trunk-case",
+            "type": "line",
+            "metadata": {"mapbox:group": "08a1b920ec22235869d8a3cc2e032162"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Trunk"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "#bfbfbf",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    9,
+                    2,
+                    18,
+                    40
+                ],
+                "line-opacity": 1
+            }
+        },
+        {
+            "id": "motorway-case",
+            "type": "line",
+            "metadata": {"mapbox:group": "08a1b920ec22235869d8a3cc2e032162"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Highway"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "#999",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    9,
+                    2,
+                    18,
+                    40
+                ],
+                "line-opacity": 1
+            }
+        },
+        {
+            "id": "street",
+            "type": "line",
+            "metadata": {"mapbox:group": "437cde94bc7935d5992ddc37b3fefb42"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Street"], true, false]
+            ],
+            "layout": {"line-join": "round", "line-cap": "round"},
+            "paint": {
+                "line-color": "hsl(23, 0%, 100%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    13,
+                    0.25,
+                    18,
+                    8
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    0,
+                    13.25,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "service",
+            "type": "line",
+            "metadata": {"mapbox:group": "437cde94bc7935d5992ddc37b3fefb42"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Service"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 100%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    12,
+                    0.25,
+                    18,
+                    10
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12,
+                    0,
+                    12.25,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "residential",
+            "type": "line",
+            "metadata": {"mapbox:group": "437cde94bc7935d5992ddc37b3fefb42"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Residential"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 100%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    12,
+                    0.25,
+                    18,
+                    10
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12,
+                    0,
+                    12.25,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "unclassified",
+            "type": "line",
+            "metadata": {"mapbox:group": "437cde94bc7935d5992ddc37b3fefb42"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Unclassified"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 100%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    11,
+                    0.25,
+                    18,
+                    10
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    0,
+                    11.25,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "tertiary",
+            "type": "line",
+            "metadata": {"mapbox:group": "437cde94bc7935d5992ddc37b3fefb42"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Tertiary"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 100%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    11,
+                    0.25,
+                    18,
+                    13
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    0,
+                    11.25,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "other",
+            "type": "line",
+            "metadata": {"mapbox:group": "437cde94bc7935d5992ddc37b3fefb42"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Other"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 100%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    11,
+                    0.25,
+                    18,
+                    13
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    0,
+                    11.25,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "secondary",
+            "type": "line",
+            "metadata": {"mapbox:group": "437cde94bc7935d5992ddc37b3fefb42"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": ["all", ["match", ["get", "type"], ["Secondary"], true, false]],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 100%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    11,
+                    0.5,
+                    12,
+                    1.5,
+                    18,
+                    24
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    9,
+                    0,
+                    11,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "primary",
+            "type": "line",
+            "metadata": {"mapbox:group": "437cde94bc7935d5992ddc37b3fefb42"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Primary"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 100%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    11,
+                    1,
+                    12,
+                    2.5,
+                    18,
+                    36
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    9,
+                    0,
+                    9.25,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "trunk",
+            "type": "line",
+            "metadata": {"mapbox:group": "437cde94bc7935d5992ddc37b3fefb42"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Trunk"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 100%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    9,
+                    0.75,
+                    18,
+                    36
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    5,
+                    0,
+                    5.25,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "highway",
+            "type": "line",
+            "metadata": {"mapbox:group": "437cde94bc7935d5992ddc37b3fefb42"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Highway"], true, false]
+            ],
+            "layout": {"line-cap": "round", "line-join": "round"},
+            "paint": {
+                "line-color": "hsl(0, 0%, 100%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    11,
+                    1,
+                    12,
+                    2.5,
+                    18,
+                    36
+                ],
+                "line-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    5,
+                    0,
+                    5.25,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "interstate-case",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                [
+                    "match",
+                    ["get", "type"],
+                    ["Interstate"],
+                    true,
+                    false
+                  ]
+            ],
+            "layout": {},
+            "paint": {
+                "line-color": "hsl(225, 58%, 67%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    9,
+                    2,
+                    18,
+                    40
+                ]
+            }
+        },
+        {
+            "id": "interstate",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                [
+                    "match",
+                    ["get", "type"],
+                    ["Interstate"],
+                    true,
+                    false
+                  ]
+            ],
+            "layout": {},
+            "paint": {
+                "line-color": "hsl(240, 35%, 92%)",
+                "line-width": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    9,
+                    0.25,
+                    18,
+                    32
+                ]
+            }
+        },
+        {
+            "id": "commercial",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "BuildingsPoly",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Commercial"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "hsl(20, 18%, 84%)",
+                "fill-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    0,
+                    14.5,
+                    1
+                ],
+                "fill-outline-color": "hsl(20, 18%, 74%)"
+            }
+        },
+        {
+            "id": "corporate-office",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "BuildingsPoly",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Corporate Office"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "hsl(20, 18%, 84%)",
+                "fill-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    0,
+                    14.5,
+                    1
+                ],
+                "fill-outline-color": "hsl(20, 18%, 74%)"
+            }
+        },
+        {
+            "id": "health",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "BuildingsPoly",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Health"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "hsl(20, 18%, 84%)",
+                "fill-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    0,
+                    14.5,
+                    1
+                ],
+                "fill-outline-color": "hsl(20, 18%, 74%)"
+            }
+        },
+        {
+            "id": "industrial",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "BuildingsPoly",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Industrial"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "hsl(20, 18%, 84%)",
+                "fill-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    0,
+                    14.5,
+                    1
+                ],
+                "fill-outline-color": "hsl(20, 18%, 74%)"
+            }
+        },
+        {
+            "id": "park-facility",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "BuildingsPoly",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Park Facility"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "hsl(20, 18%, 84%)",
+                "fill-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    0,
+                    14.5,
+                    1
+                ],
+                "fill-outline-color": "hsl(20, 18%, 74%)"
+            }
+        },
+        {
+            "id": "public-and-institutional",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "BuildingsPoly",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Public and Institutional"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "hsl(20, 18%, 84%)",
+                "fill-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    0,
+                    14.5,
+                    1
+                ],
+                "fill-outline-color": "hsl(20, 18%, 74%)"
+            }
+        },
+        {
+            "id": "religious",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "BuildingsPoly",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Religious"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "hsl(20, 18%, 84%)",
+                "fill-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    0,
+                    14.5,
+                    1
+                ],
+                "fill-outline-color": "hsl(20, 18%, 74%)"
+            }
+        },
+        {
+            "id": "residential-buildings",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "BuildingsPoly",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Residential"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "hsl(20, 18%, 84%)",
+                "fill-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    0,
+                    14.5,
+                    1
+                ],
+                "fill-outline-color": "hsl(20, 18%, 74%)"
+            }
+        },
+        {
+            "id": "transportation-and-utility",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "BuildingsPoly",
+            "minzoom": 13,
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Transportantion and Utility"], true, false]
+            ],
+            "layout": {},
+            "paint": {
+                "fill-color": "hsl(20, 18%, 84%)",
+                "fill-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    0,
+                    14.5,
+                    1
+                ],
+                "fill-outline-color": "hsl(20, 18%, 74%)"
+            }
+        },
+        {
+            "id": "cycleway-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "237de088f7dff4c209f77e1b41128516"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Cycleway"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    9,
+                    18,
+                    12
+                ]
+            },
+            "paint": {
+                "text-color": "#5a483f",
+                "text-halo-color": "hsl(0, 0%, 100%)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2,
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13.99,
+                    0,
+                    14,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "pedestrian-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "237de088f7dff4c209f77e1b41128516"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Pedestrian"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    9,
+                    18,
+                    12
+                ]
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 20%)",
+                "text-halo-color": "hsl(0, 0%, 100%)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2,
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13.99,
+                    0,
+                    14,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "track-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "237de088f7dff4c209f77e1b41128516"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Track"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    9,
+                    18,
+                    12
+                ]
+            },
+            "paint": {
+                "text-color": "#5a483f",
+                "text-halo-color": "hsl(0, 0%, 100%)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2,
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13.99,
+                    0,
+                    14,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "street-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "237de088f7dff4c209f77e1b41128516"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Street"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    9,
+                    18,
+                    12
+                ]
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 20%)",
+                "text-halo-color": "hsl(0, 0%, 100%)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2,
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13.99,
+                    0,
+                    14,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "service-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "237de088f7dff4c209f77e1b41128516"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Service"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    9,
+                    18,
+                    12
+                ]
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 20%)",
+                "text-halo-color": "hsl(0, 0%, 100%)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2,
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12.99,
+                    0,
+                    13,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "residential-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "237de088f7dff4c209f77e1b41128516"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Residential"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    9,
+                    18,
+                    12
+                ]
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 20%)",
+                "text-halo-color": "hsl(0, 0%, 100%)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2,
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12.99,
+                    0,
+                    13,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "unclassified-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "237de088f7dff4c209f77e1b41128516"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Unclassified"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    9,
+                    18,
+                    12
+                ]
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 20%)",
+                "text-halo-color": "hsl(0, 0%, 100%)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2,
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11.99,
+                    0,
+                    12,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "tertiary-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "237de088f7dff4c209f77e1b41128516"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Tertiary"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    9,
+                    18,
+                    12
+                ]
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 20%)",
+                "text-halo-color": "hsl(0, 0%, 100%)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2,
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11.99,
+                    0,
+                    12,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "secondary-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "237de088f7dff4c209f77e1b41128516"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Secondary"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "symbol-spacing": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    50,
+                    14,
+                    100
+                ],
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    9,
+                    18,
+                    13
+                ]
+            },
+            "paint": {
+                "text-color": [
+                    "interpolate-hcl",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    "hsl(0, 0%, 20%)",
+                    13,
+                    "hsl(0, 0%, 10%)"
+                ],
+                "text-halo-color": "hsl(0, 0%, 100%)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2,
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10.99,
+                    0,
+                    11,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "stream-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "247a935b2a8f670d23190ea1d0fb07c3"},
+            "source": "composite",
+            "source-layer": "HidrographyLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Stream"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    10,
+                    18,
+                    16
+                ],
+                "text-font": ["Open Sans Italic", "Arial Unicode MS Regular"],
+                "text-letter-spacing": 0.1
+            },
+            "paint": {
+                "text-color": "#46597c",
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12.99,
+                    0,
+                    13,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "bayou-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "247a935b2a8f670d23190ea1d0fb07c3"},
+            "source": "composite",
+            "source-layer": "HidrographyLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Bayou"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    10,
+                    18,
+                    16
+                ],
+                "text-font": ["Open Sans Italic", "Arial Unicode MS Regular"],
+                "text-letter-spacing": 0.1
+            },
+            "paint": {
+                "text-color": "#46597c",
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    9.99,
+                    0,
+                    10,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "river-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "247a935b2a8f670d23190ea1d0fb07c3"},
+            "source": "composite",
+            "source-layer": "HidrographyLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["River"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    10,
+                    18,
+                    16
+                ],
+                "text-font": ["Open Sans Italic", "Arial Unicode MS Regular"],
+                "text-letter-spacing": 0.1
+            },
+            "paint": {
+                "text-color": "#46597c",
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    9.99,
+                    0,
+                    10,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "drain-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "9a57e01f0508eba760c62ca8b2998286"},
+            "source": "composite",
+            "source-layer": "UtilitiesLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Drain"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    13,
+                    10,
+                    18,
+                    16
+                ],
+                "text-font": ["Open Sans Italic", "Arial Unicode MS Regular"],
+                "text-letter-spacing": 0.1
+            },
+            "paint": {
+                "text-color": "#46597c",
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12.99,
+                    0,
+                    13,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "canal-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "9a57e01f0508eba760c62ca8b2998286"},
+            "source": "composite",
+            "source-layer": "UtilitiesLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Canal"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    10,
+                    18,
+                    16
+                ],
+                "text-font": ["Open Sans Italic", "Arial Unicode MS Regular"],
+                "text-letter-spacing": 0.1
+            },
+            "paint": {
+                "text-color": "#46597c",
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    9.99,
+                    0,
+                    10,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "field-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "82d49f68af211f15d30e335b2b82e21a"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "minzoom": 11,
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Field"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "text-size": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    12,
+                    18,
+                    16
+                ],
+                "text-max-width": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12,
+                    5,
+                    14,
+                    10
+                ]
+            },
+            "paint": {
+                "text-color": "hsl(122, 30%, 23%)",
+                "text-halo-color": "hsla(0, 0%, 100%, 0.5)",
+                "text-halo-width": 1,
+                "icon-opacity": 0.7,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "university-campus-label",
+            "type": "symbol",
+              "metadata": {
+                "mapbox:group": "82d49f68af211f15d30e335b2b82e21a"
+            },
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "minzoom": 11,
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                [
+                  "match",
+                  ["get", "type"],
+                  ["University Campus"],
+                  true,
+                  false
+                ]
+            ],
+            "layout": {
+                "text-field": [
+                  "to-string",
+                  ["get", "name"]
+                ],
+                "text-size": [
+                  "interpolate",
+                  ["exponential", 1.6],
+                  ["zoom"],
+                  10,
+                  12,
+                  18,
+                  16
+                ],
+                "text-max-width": [
+                  "interpolate",
+                  ["linear"],
+                  ["zoom"],
+                  12,
+                  5,
+                  14,
+                  10
+                ]
+            },
+            "paint": {
+                "text-color": "rgba(78, 72, 35, 1)",
+                "text-halo-color": "hsla(0, 0%, 100%, 0.5)",
+                "text-halo-width": 1,
+                "icon-opacity": 0.7,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "graveyard-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "82d49f68af211f15d30e335b2b82e21a"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "minzoom": 11,
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Graveyard"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "text-size": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    12,
+                    18,
+                    16
+                ],
+                "text-max-width": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12,
+                    5,
+                    14,
+                    10
+                ]
+            },
+            "paint": {
+                "text-color": "hsl(122, 30%, 23%)",
+                "text-halo-color": "hsla(0, 0%, 100%, 0.5)",
+                "text-halo-width": 1,
+                "icon-opacity": 0.7,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "golf-course-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "82d49f68af211f15d30e335b2b82e21a"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "minzoom": 12,
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Golf Course"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "text-size": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    12,
+                    18,
+                    16
+                ],
+                "text-max-width": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12,
+                    5,
+                    14,
+                    10
+                ]
+            },
+            "paint": {
+                "text-color": "hsl(122, 30%, 23%)",
+                "text-halo-color": "hsla(0, 0%, 100%, 0.5)",
+                "text-halo-width": 1,
+                "icon-opacity": 0.7,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "park-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "82d49f68af211f15d30e335b2b82e21a"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "minzoom": 11,
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Park"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "text-size": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    11,
+                    18,
+                    16
+                ],
+                "text-max-width": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12,
+                    5,
+                    14,
+                    10
+                ]
+            },
+            "paint": {
+                "text-color": "#294c2a",
+                "text-halo-color": "hsla(0, 0%, 100%, 0.5)",
+                "text-halo-width": 1,
+                "icon-opacity": 0.7,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "campsite-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "82d49f68af211f15d30e335b2b82e21a"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Camp Site"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "text-size": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    12,
+                    18,
+                    16
+                ],
+                "text-max-width": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12,
+                    5,
+                    14,
+                    10
+                ]
+            },
+            "paint": {
+                "text-color": "hsl(122, 30%, 23%)",
+                "text-halo-color": "hsla(0, 0%, 100%, 0.5)",
+                "text-halo-width": 1,
+                "icon-opacity": 0.7,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "dog-park-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "82d49f68af211f15d30e335b2b82e21a"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Dog Park"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "text-size": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    12,
+                    18,
+                    16
+                ],
+                "text-max-width": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12,
+                    5,
+                    14,
+                    10
+                ]
+            },
+            "paint": {
+                "text-color": "hsl(122, 30%, 23%)",
+                "text-halo-color": "hsla(0, 0%, 100%, 0.5)",
+                "text-halo-width": 1,
+                "icon-opacity": 0.7,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "ice-rink-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "82d49f68af211f15d30e335b2b82e21a"},
+            "source": "composite",
+            "source-layer": "OpenSpacesPoly",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Ice Rink"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "text-size": [
+                    "interpolate",
+                    ["exponential", 1.6],
+                    ["zoom"],
+                    10,
+                    12,
+                    18,
+                    16
+                ],
+                "text-max-width": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    12,
+                    5,
+                    14,
+                    10
+                ]
+            },
+            "paint": {
+                "text-color": "#3a6458",
+                "text-halo-color": "hsla(0, 0%, 100%, 0.5)",
+                "text-halo-width": 1,
+                "text-halo-blur": 2
+            }
+        },
+        {
+            "id": "primary-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "237de088f7dff4c209f77e1b41128516"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Primary"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "symbol-spacing": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    50,
+                    14,
+                    100
+                ],
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    10,
+                    18,
+                    16
+                ]
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 10%)",
+                "text-halo-color": "hsl(0, 0%, 100%)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2,
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10.99,
+                    0,
+                    11,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "trunk-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "237de088f7dff4c209f77e1b41128516"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Trunk"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    11,
+                    18,
+                    16
+                ]
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 10%)",
+                "text-halo-color": "hsl(0, 0%, 100%)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2,
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10.99,
+                    0,
+                    11,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "motorway-label",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "237de088f7dff4c209f77e1b41128516"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Highway"], true, false]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "name"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    11,
+                    18,
+                    16
+                ]
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 10%)",
+                "text-halo-color": "hsl(0, 0%, 100%)",
+                "text-halo-width": 2,
+                "text-halo-blur": 2,
+                "text-opacity": 1
+            }
+        },
+        {
+            "id": "trunk-shield",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "237de088f7dff4c209f77e1b41128516"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Trunk"], true, false],
+                ["has", "namealt"]
+            ],
+            "layout": {
+                "text-field": ["to-string", ["get", "namealt"]],
+                "symbol-placement": "line",
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    9,
+                    18,
+                    10
+                ],
+                "icon-image": "default-3",
+                "text-rotation-alignment": "viewport",
+                "icon-rotation-alignment": "viewport"
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 10%)",
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    9.99,
+                    0,
+                    10,
+                    1
+                ],
+                "icon-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    9.99,
+                    0,
+                    10,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "motorway-shield",
+            "type": "symbol",
+            "metadata": {"mapbox:group": "237de088f7dff4c209f77e1b41128516"},
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Highway"], true, false],
+                ["has", "namealt"]
+            ],
+            "layout": {
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    9,
+                    18,
+                    10
+                ],
+                "icon-image": "default-3",
+                "text-rotation-alignment": "viewport",
+                "icon-rotation-alignment": "viewport",
+                "text-field": ["to-string", ["get", "namealt"]],
+                "symbol-placement": "line"
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 10%)",
+                "text-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    9.99,
+                    0,
+                    10,
+                    1
+                ],
+                "icon-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    9.99,
+                    0,
+                    10,
+                    1
+                ]
+            }
+        },
+        {
+            "id": "Highway Shield",
+            "type": "symbol",
+            "source": "composite",
+            "source-layer": "RoadsLine",
+            "filter": [
+                "all",
+                ["<=", ["get", "firstyear"], 2012],
+                [">=", ["get", "lastyear"], 2012],
+                ["match", ["get", "type"], ["Interstate"], true, false],
+                ["has", "namealt"]
+            ],
+            "layout": {
+                "icon-image": "shield",
+                "icon-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    0.3,
+                    13,
+                    0.4
+                ],
+                "text-field": ["to-string", ["get", "namealt"]],
+                "text-font": [
+                    "PT Sans Narrow Bold",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    10,
+                    9,
+                    13,
+                    13
+                ],
+                "icon-padding": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    11,
+                    50,
+                    15,
+                    100
+                ],
+                "text-offset": [0, 0.1]
+            },
+            "paint": {"text-color": "hsl(0, 0%, 100%)"}
+        }
+    ],
+    "created": "2020-03-06T14:51:40.760Z",
+    "modified": "2020-08-21T12:04:52.912Z",
+    "id": "ck7garlfe3hgo1ikih7w84cu7",
+    "owner": "axismaps",
+    "visibility": "private",
+    "draft": false
+}
