@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactMapGL, { Source, Layer, Marker, NavigationControl } from 'react-map-gl';
-import { Box, IconButton } from '@chakra-ui/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCamera } from '@fortawesome/free-solid-svg-icons';
 
 import { setStyleYear, fitBounds, setActiveLayer } from './mapUtils';
+import styles from './styles.module.css';
 
 const Atlas = ({
   size,
@@ -19,6 +17,7 @@ const Atlas = ({
   mapStyle,
   mapBounds,
   rasterUrl,
+  viewIcon,
 }) => {
   const mapRef = useRef(null);
 
@@ -74,26 +73,32 @@ const Atlas = ({
           <Layer id="viewcone" type="fill" paint={{ 'fill-color': 'rgba(0,0,0,0.25)' }} />
         </Source>
       )}
-      {viewpoints.map(v => (
+      {viewpoints.map((v, i) => (
         <Marker key={`marker${v.ssid}`} {...v} offsetLeft={-15} offsetTop={-15}>
-          <IconButton
-            icon={<FontAwesomeIcon icon={faCamera} />}
-            as="div"
-            w="30px"
-            h="30px"
-            minWidth="none"
-            borderRadius="50%"
-            backgroundColor="white"
-            boxShadow="md"
+          <div
+            role="button"
+            tabIndex={i}
+            style={{
+              width: 30,
+              height: 30,
+              borderRadius: '50%',
+              backgroundColor: 'white',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+            }}
             onClick={() => {
               if (v.ssid !== activeBasemap) basemapHandler(v.ssid);
             }}
-          />
+            onKeyPress={() => {
+              if (v.ssid !== activeBasemap) basemapHandler(v.ssid);
+            }}
+          >
+            {viewIcon}
+          </div>
         </Marker>
       ))}
-      <Box pos="absolute" left={['auto', '15px']} right={['40px', 'auto']} top="15px">
+      <div className={styles.buttons}>
         <NavigationControl />
-      </Box>
+      </div>
     </ReactMapGL>
   );
 };
@@ -119,6 +124,7 @@ Atlas.propTypes = {
   mapStyle: PropTypes.shape().isRequired,
   rasterUrl: PropTypes.string,
   mapBounds: PropTypes.arrayOf(PropTypes.number),
+  viewIcon: PropTypes.node,
 };
 
 Atlas.defaultProps = {
@@ -133,6 +139,7 @@ Atlas.defaultProps = {
   viewpoints: [],
   mapBounds: null,
   rasterUrl: null,
+  viewIcon: null,
 };
 
 export default Atlas;

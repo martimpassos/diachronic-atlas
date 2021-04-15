@@ -11,8 +11,8 @@
             "type": "vector"
         }
     },
-    "sprite": "mapbox://sprites/axismaps/ck7garlfe3hgo1ikih7w84cu7/0ebgij4h38ap6ce5elewniqee",
-    "glyphs": "mapbox://fonts/axismaps/{fontstack}/{range}.pbf",
+
+    "glyphs": "http://fonts.openmaptiles.org/{fontstack}/{range}.pbf",
     "layers": [
         {
             "id": "background",
@@ -1945,6 +1945,7 @@
                 ["match", ["get", "type"], ["Cycleway"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-size": [
@@ -1986,6 +1987,7 @@
                 ["match", ["get", "type"], ["Pedestrian"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-size": [
@@ -2027,6 +2029,7 @@
                 ["match", ["get", "type"], ["Track"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-size": [
@@ -2068,6 +2071,7 @@
                 ["match", ["get", "type"], ["Street"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-size": [
@@ -2109,6 +2113,7 @@
                 ["match", ["get", "type"], ["Service"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-size": [
@@ -2150,6 +2155,7 @@
                 ["match", ["get", "type"], ["Residential"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-size": [
@@ -2191,6 +2197,7 @@
                 ["match", ["get", "type"], ["Unclassified"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-size": [
@@ -2232,6 +2239,7 @@
                 ["match", ["get", "type"], ["Tertiary"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-size": [
@@ -2275,6 +2283,7 @@
             "layout": {
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
+                "text-font": ["Open Sans Regular"],
                 "symbol-spacing": [
                     "interpolate",
                     ["linear"],
@@ -2342,7 +2351,7 @@
                     18,
                     16
                 ],
-                "text-font": ["Open Sans Italic", "Arial Unicode MS Regular"],
+                "text-font": ["Open Sans Italic"],
                 "text-letter-spacing": 0.1
             },
             "paint": {
@@ -2382,7 +2391,7 @@
                     18,
                     16
                 ],
-                "text-font": ["Open Sans Italic", "Arial Unicode MS Regular"],
+                "text-font": ["Open Sans Italic"],
                 "text-letter-spacing": 0.1
             },
             "paint": {
@@ -2422,7 +2431,7 @@
                     18,
                     16
                 ],
-                "text-font": ["Open Sans Italic", "Arial Unicode MS Regular"],
+                "text-font": ["Open Sans Italic"],
                 "text-letter-spacing": 0.1
             },
             "paint": {
@@ -2462,7 +2471,7 @@
                     18,
                     16
                 ],
-                "text-font": ["Open Sans Italic", "Arial Unicode MS Regular"],
+                "text-font": ["Open Sans Italic"],
                 "text-letter-spacing": 0.1
             },
             "paint": {
@@ -2502,7 +2511,7 @@
                     18,
                     16
                 ],
-                "text-font": ["Open Sans Italic", "Arial Unicode MS Regular"],
+                "text-font": ["Open Sans Italic"],
                 "text-letter-spacing": 0.1
             },
             "paint": {
@@ -2533,6 +2542,7 @@
             ],
             "layout": {
                 "text-field": ["to-string", ["get", "name"]],
+                "text-font": ["Open Sans Regular"],
                 "text-size": [
                     "interpolate",
                     ["exponential", 1.6],
@@ -2582,6 +2592,7 @@
                 ]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": [
                   "to-string",
                   ["get", "name"]
@@ -2637,6 +2648,7 @@
                     18,
                     16
                 ],
+                "text-font": ["Open Sans Regular"],
                 "text-max-width": [
                     "interpolate",
                     ["linear"],
@@ -2669,6 +2681,7 @@
                 ["match", ["get", "type"], ["Golf Course"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "text-size": [
                     "interpolate",
@@ -2711,6 +2724,7 @@
                 ["match", ["get", "type"], ["Park"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "text-size": [
                     "interpolate",
@@ -2752,6 +2766,7 @@
                 ["match", ["get", "type"], ["Camp Site"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "text-size": [
                     "interpolate",
@@ -2793,6 +2808,7 @@
                 ["match", ["get", "type"], ["Dog Park"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "text-size": [
                     "interpolate",
@@ -2834,6 +2850,7 @@
                 ["match", ["get", "type"], ["Ice Rink"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "text-size": [
                     "interpolate",
@@ -2874,6 +2891,7 @@
                 ["match", ["get", "type"], ["Primary"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "symbol-spacing": [
@@ -2924,6 +2942,7 @@
                 ["match", ["get", "type"], ["Trunk"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-size": [
@@ -2965,6 +2984,7 @@
                 ["match", ["get", "type"], ["Highway"], true, false]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "name"]],
                 "symbol-placement": "line",
                 "text-size": [
@@ -2999,6 +3019,7 @@
                 ["has", "namealt"]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-field": ["to-string", ["get", "namealt"]],
                 "symbol-placement": "line",
                 "text-size": [
@@ -3050,6 +3071,7 @@
                 ["has", "namealt"]
             ],
             "layout": {
+                "text-font": ["Open Sans Regular"],
                 "text-size": [
                     "interpolate",
                     ["linear"],
@@ -3111,10 +3133,7 @@
                     0.4
                 ],
                 "text-field": ["to-string", ["get", "namealt"]],
-                "text-font": [
-                    "PT Sans Narrow Bold",
-                    "Arial Unicode MS Regular"
-                ],
+                "text-font": ["Open Sans Regular"],
                 "text-size": [
                     "interpolate",
                     ["linear"],
