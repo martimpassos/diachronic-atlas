@@ -107,7 +107,7 @@ Atlas.propTypes = {
   year: PropTypes.number.isRequired,
   activeBasemap: PropTypes.string,
   opacity: PropTypes.number,
-  basemapHandler: PropTypes.func.isRequired,
+  basemapHandler: PropTypes.func,
   highlightedLayer: PropTypes.shape(),
   size: PropTypes.shape({
     width: PropTypes.number,
@@ -140,6 +140,7 @@ Atlas.defaultProps = {
   mapBounds: null,
   rasterUrl: null,
   viewIcon: null,
+  basemapHandler: () => null,
 };
 
 export default Atlas;
