@@ -18,13 +18,12 @@ const Atlas = ({
   mapBounds,
   rasterUrl,
   viewIcon,
+  viewport,
 }) => {
   const mapRef = useRef(null);
 
   const [mapViewport, setMapViewport] = useState({
-    latitude: 29.74991,
-    longitude: -95.36026,
-    zoom: 11,
+    ...viewport,
   });
 
   useEffect(() => {
@@ -125,6 +124,7 @@ Atlas.propTypes = {
   rasterUrl: PropTypes.string,
   mapBounds: PropTypes.arrayOf(PropTypes.number),
   viewIcon: PropTypes.node,
+  viewport: PropTypes.shape().isRequired,
 };
 
 Atlas.defaultProps = {

@@ -6,7 +6,17 @@ import style from './style.json'
 import 'diachronic-atlas/dist/index.css'
 
 const App = () => {
-  return <Atlas mapStyle={style} year={1950} basemapHandler={() => {}} />
+  return (
+  <Atlas 
+    mapStyle={style}
+    year={1950} 
+    basemapHandler={() => {}} 
+    viewport={{
+      latitude: 29.74991,
+      longitude: -95.36026,
+      zoom: 11
+    }} 
+  />)
 }
 
 export default App
