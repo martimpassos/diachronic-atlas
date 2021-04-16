@@ -12,10 +12,9 @@ const Atlas = ({
   opacity,
   basemapHandler,
   highlightedLayer,
-  viewcone,
+  geojson,
   viewpoints,
   mapStyle,
-  mapBounds,
   rasterUrl,
   viewIcon,
   viewport,
@@ -24,20 +23,8 @@ const Atlas = ({
 
   const [mapViewport, setMapViewport] = useState({
     ...viewport,
+    ...size,
   });
-
-  useEffect(() => {
-    const map = mapRef.current.getMap();
-    if (map) {
-      map.setStyle(setActiveLayer(setStyleYear(year, mapStyle), highlightedLayer));
-    }
-  }, [year, highlightedLayer]);
-
-  useEffect(async () => {
-    if (mapBounds || viewcone) {
-      setMapViewport(fitBounds(viewcone, mapViewport, mapBounds));
-    }
-  }, [mapBounds, viewcone]);
 
   useEffect(() => {
     setMapViewport({
@@ -50,6 +37,19 @@ const Atlas = ({
     setMapViewport(nextViewport);
   };
 
+  useEffect(() => {
+    const map = mapRef.current.getMap();
+    if (map) {
+      map.setStyle(setActiveLayer(setStyleYear(year, mapStyle), highlightedLayer));
+    }
+  }, [year, highlightedLayer]);
+
+  useEffect(async () => {
+    if (geojson) {
+      setMapViewport(fitBounds(geojson, mapViewport));
+    }
+  }, [geojson]);
+
   return (
     <ReactMapGL
       ref={mapRef}
@@ -57,7 +57,7 @@ const Atlas = ({
       onViewportChange={onViewportChange}
       {...mapViewport}
     >
-      {rasterUrl && activeBasemap && !viewcone && (
+      {rasterUrl && activeBasemap && (
         <Source
           key={activeBasemap}
           type="raster"
@@ -67,8 +67,8 @@ const Atlas = ({
           <Layer id="overlay" type="raster" paint={{ 'raster-opacity': opacity }} />
         </Source>
       )}
-      {viewcone && (
-        <Source key={`view${activeBasemap}`} type="geojson" data={viewcone}>
+      {geojson && !activeBasemap && (
+        <Source key={`view${activeBasemap}`} type="geojson" data={geojson}>
           <Layer id="viewcone" type="fill" paint={{ 'fill-color': 'rgba(0,0,0,0.25)' }} />
         </Source>
       )}
@@ -112,7 +112,7 @@ Atlas.propTypes = {
     width: PropTypes.number,
     height: PropTypes.number,
   }),
-  viewcone: PropTypes.shape(),
+  geojson: PropTypes.shape(),
   viewpoints: PropTypes.arrayOf(
     PropTypes.shape({
       latitude: PropTypes.number,
@@ -122,7 +122,6 @@ Atlas.propTypes = {
   ),
   mapStyle: PropTypes.shape().isRequired,
   rasterUrl: PropTypes.string,
-  mapBounds: PropTypes.arrayOf(PropTypes.number),
   viewIcon: PropTypes.node,
   viewport: PropTypes.shape().isRequired,
 };
@@ -135,9 +134,8 @@ Atlas.defaultProps = {
     height: 600,
   },
   highlightedLayer: null,
-  viewcone: null,
+  geojson: null,
   viewpoints: [],
-  mapBounds: null,
   rasterUrl: null,
   viewIcon: null,
   basemapHandler: () => null,

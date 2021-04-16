@@ -24,8 +24,8 @@ const setStyleYear = (year, currentStyle) => {
   return style;
 };
 
-const fitBounds = (geom, mapViewport, bounds) => {
-  const [minX, minY, maxX, maxY] = bounds || bbox(geom);
+const fitBounds = (geom, mapViewport) => {
+  const [minX, minY, maxX, maxY] = bbox(geom);
   const { longitude, latitude, zoom } = new WebMercatorViewport(mapViewport).fitBounds(
     [
       [minX, minY],
