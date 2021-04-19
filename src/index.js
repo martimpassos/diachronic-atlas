@@ -44,7 +44,7 @@ const Atlas = ({
     }
   }, [year, highlightedLayer]);
 
-  useEffect(async () => {
+  useEffect(() => {
     if (geojson) {
       setMapViewport(fitBounds(geojson, mapViewport));
     }
