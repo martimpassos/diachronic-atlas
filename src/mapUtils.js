@@ -46,6 +46,7 @@ const fitBounds = (geom, mapViewport) => {
 const getOpacityKey = layer => {
   if (layer.type === 'line') return ['line-opacity'];
   if (layer.type === 'symbol') return ['text-opacity', 'icon-opacity'];
+  if (layer.type === 'background') return ['background-opacity'];
   return ['fill-opacity'];
 };
 
