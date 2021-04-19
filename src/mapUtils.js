@@ -62,10 +62,6 @@ const setActiveLayer = (currentStyle, highlightedLayer) => {
   style.layers = style.layers.map(mapLayer => {
     let newLayer = { ...mapLayer };
     const opacityKey = getOpacityKey(newLayer);
-    if (newLayer.type === 'background') {
-      newLayer.paint['background-color'] = highlightedLayer ? '#eee' : 'hsl(20, 18%, 90%)';
-      return newLayer;
-    }
     if (highlightedLayer) {
       const { layer, type } = highlightedLayer;
       const layerType = newLayer.filter.find(l => l[1][1] === 'type')[2][0];
