@@ -10,7 +10,7 @@ const App = () => {
   return (
   <Atlas 
     mapStyle={style}
-    year={1950} 
+    year={1950}
     basemapHandler={() => {}} 
     geojson={geojson}
     viewport={{

@@ -2,8 +2,9 @@ import bbox from '@turf/bbox';
 import { isArray } from 'lodash';
 import { WebMercatorViewport, FlyToInterpolator } from 'react-map-gl';
 
-const setStyleYear = (year, currentStyle) => {
+const setStyleYear = (range, currentStyle) => {
   const style = { ...currentStyle };
+  const [minYear, maxYear] = range;
   style.layers = style.layers.map(layer => {
     if (layer.source === 'composite') {
       const filter = layer.filter
@@ -13,8 +14,8 @@ const setStyleYear = (year, currentStyle) => {
         ...layer,
         filter: [
           'all',
-          ['<=', ['get', 'firstyear'], year],
-          ['>=', ['get', 'lastyear'], year],
+          ['<=', ['get', 'firstyear'], maxYear],
+          ['>=', ['get', 'lastyear'], minYear],
           ...filter,
         ],
       };

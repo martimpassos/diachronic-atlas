@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import ReactMapGL, { Source, Layer, Marker, NavigationControl } from 'react-map-gl';
 
 import { setStyleYear, fitBounds, setActiveLayer } from './mapUtils';
+import { requireAtLeastOne } from './utils';
 import styles from './styles.module.css';
 
 const Atlas = ({
   size,
   year,
+  dates,
   activeBasemap,
   opacity,
   basemapHandler,
@@ -40,9 +42,10 @@ const Atlas = ({
   useEffect(() => {
     const map = mapRef.current.getMap();
     if (map) {
-      map.setStyle(setActiveLayer(setStyleYear(year, mapStyle), highlightedLayer));
+      const range = dates || [year, year];
+      map.setStyle(setActiveLayer(setStyleYear(range, mapStyle), highlightedLayer));
     }
-  }, [year, highlightedLayer]);
+  }, [year, dates, highlightedLayer]);
 
   useEffect(() => {
     if (geojson) {
@@ -102,8 +105,14 @@ const Atlas = ({
   );
 };
 
+const dateProps = requireAtLeastOne({
+  year: PropTypes.number,
+  dates: PropTypes.arrayOf(PropTypes.number),
+});
+
 Atlas.propTypes = {
-  year: PropTypes.number.isRequired,
+  year: dateProps,
+  dates: dateProps,
   activeBasemap: PropTypes.string,
   opacity: PropTypes.number,
   basemapHandler: PropTypes.func,
@@ -127,6 +136,8 @@ Atlas.propTypes = {
 };
 
 Atlas.defaultProps = {
+  year: null,
+  dates: null,
   activeBasemap: null,
   opacity: 0.75,
   size: {
