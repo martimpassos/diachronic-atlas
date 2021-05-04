@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import ReactMapGL, { Source, Layer, Marker, NavigationControl } from 'react-map-gl';
+import ReactMapGL, { Source, Layer, NavigationControl } from 'react-map-gl';
+
+import ViewMarkers from './ViewMarkers';
 
 import { setStyleYear, fitBounds, setActiveLayer } from './mapUtils';
 import { requireAtLeastOne } from './utils';
@@ -75,29 +77,13 @@ const Atlas = ({
           <Layer id="viewcone" type="fill" paint={{ 'fill-color': 'rgba(0,0,0,0.25)' }} />
         </Source>
       )}
-      {viewpoints.map((v, i) => (
-        <Marker key={`marker${v.ssid}`} {...v} offsetLeft={-15} offsetTop={-15}>
-          <div
-            role="button"
-            tabIndex={i}
-            style={{
-              width: 30,
-              height: 30,
-              borderRadius: '50%',
-              backgroundColor: 'white',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-            }}
-            onClick={() => {
-              if (v.ssid !== activeBasemap) basemapHandler(v.ssid);
-            }}
-            onKeyPress={() => {
-              if (v.ssid !== activeBasemap) basemapHandler(v.ssid);
-            }}
-          >
-            {viewIcon}
-          </div>
-        </Marker>
-      ))}
+      <ViewMarkers
+        viewpoints={viewpoints}
+        markerHandler={ssid => {
+          if (ssid !== activeBasemap) basemapHandler(ssid);
+        }}
+        viewIcon={viewIcon}
+      />
       <div className={styles.buttons}>
         <NavigationControl />
       </div>
