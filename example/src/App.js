@@ -23,6 +23,7 @@ const App = () => {
     }}
     viewpoints={documents}
     viewIcon={<FontAwesomeIcon icon={faCamera}/>}
+    circleMarkers
   />)
 }
 

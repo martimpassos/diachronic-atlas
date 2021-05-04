@@ -22,6 +22,7 @@ const Atlas = ({
   rasterUrl,
   viewIcon,
   viewport,
+  circleMarkers,
 }) => {
   const mapRef = useRef(null);
 
@@ -83,6 +84,7 @@ const Atlas = ({
           if (ssid !== activeBasemap) basemapHandler(ssid);
         }}
         viewIcon={viewIcon}
+        circleMarkers={circleMarkers}
       />
       <div className={styles.buttons}>
         <NavigationControl />
@@ -119,6 +121,7 @@ Atlas.propTypes = {
   rasterUrl: PropTypes.string,
   viewIcon: PropTypes.node,
   viewport: PropTypes.shape().isRequired,
+  circleMarkers: PropTypes.bool,
 };
 
 Atlas.defaultProps = {
@@ -136,6 +139,7 @@ Atlas.defaultProps = {
   rasterUrl: null,
   viewIcon: null,
   basemapHandler: () => null,
+  circleMarkers: false,
 };
 
 export default Atlas;
