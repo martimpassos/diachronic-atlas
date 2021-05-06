@@ -54,7 +54,7 @@ const Circle = ({ viewpoints }) => {
   return (
     <Source type="geojson" data={geojson}>
       <Layer
-        id="viewpoint-case"
+        id="viewpoints"
         type="circle"
         paint={{ 'circle-stroke-color': '#FFFFFF', 'circle-stroke-width': 2 }}
       />

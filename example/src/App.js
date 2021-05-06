@@ -14,7 +14,7 @@ const App = () => {
   <Atlas 
     mapStyle={style}
     year={1950}
-    basemapHandler={() => {}} 
+    basemapHandler={ssid => console.log(ssid)} 
     geojson={geojson}
     viewport={{
       latitude: 29.74991,

@@ -60,6 +60,11 @@ const Atlas = ({
       ref={mapRef}
       mapStyle={mapStyle}
       onViewportChange={onViewportChange}
+      interactiveLayerIds={['viewpoints']}
+      onClick={e => {
+        const [feature] = e.features;
+        if (feature) basemapHandler(feature.id);
+      }}
       {...mapViewport}
     >
       {rasterUrl && activeBasemap && (
