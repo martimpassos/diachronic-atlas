@@ -63,7 +63,7 @@ const Atlas = ({
       interactiveLayerIds={['viewpoints']}
       onClick={e => {
         const [feature] = e.features;
-        if (feature) basemapHandler(feature.id);
+        if (feature) basemapHandler(feature.properties.ssid);
       }}
       {...mapViewport}
     >

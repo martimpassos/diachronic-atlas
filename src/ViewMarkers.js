@@ -41,8 +41,8 @@ const Circle = ({ viewpoints }) => {
     type: 'FeatureCollection',
     features: viewpoints.map(v => ({
       type: 'Feature',
-      id: v.ssid,
       properties: {
+        ssid: v.ssid,
         title: v.title,
       },
       geometry: {
