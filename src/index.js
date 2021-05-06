@@ -6,7 +6,6 @@ import ViewMarkers from './ViewMarkers';
 
 import { setStyleYear, fitBounds, setActiveLayer } from './mapUtils';
 import { requireAtLeastOne } from './utils';
-import styles from './styles.module.css';
 
 const Atlas = ({
   size,
@@ -86,7 +85,7 @@ const Atlas = ({
         viewIcon={viewIcon}
         circleMarkers={circleMarkers}
       />
-      <div className={styles.buttons}>
+      <div style={{ position: 'absolute', left: 15, right: 'auto', top: 15 }}>
         <NavigationControl />
       </div>
     </ReactMapGL>
