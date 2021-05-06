@@ -67,6 +67,8 @@ Circle.propTypes = {
 };
 
 const ViewMarkers = ({ viewpoints, markerHandler, viewIcon, circleMarkers }) => {
+  if (!viewpoints || !Array.isArray(viewpoints)) return null;
+
   if (circleMarkers) {
     return <Circle viewpoints={viewpoints} />;
   }
