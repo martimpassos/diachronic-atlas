@@ -7,7 +7,6 @@ import Atlas from 'diachronic-atlas'
 import style from './style.json'
 import geojson from './cone.json'
 import documents from './documents.json'
-import 'diachronic-atlas/dist/index.css'
 
 const App = () => {
   return (
