@@ -48,7 +48,7 @@ const getOpacityKey = layer => {
   if (layer.type === 'line') return ['line-opacity'];
   if (layer.type === 'symbol') return ['text-opacity', 'icon-opacity'];
   if (layer.type === 'background') return ['background-opacity'];
-  if (layer.type === 'raster') return ['raster-opcacity'];
+  if (layer.type === 'raster') return ['raster-opacity'];
   return ['fill-opacity'];
 };
 
