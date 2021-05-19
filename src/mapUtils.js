@@ -48,7 +48,6 @@ const getOpacityKey = layer => {
   if (layer.type === 'line') return ['line-opacity'];
   if (layer.type === 'symbol') return ['text-opacity', 'icon-opacity'];
   if (layer.type === 'background') return ['background-opacity'];
-  if (layer.type === 'raster') return ['raster-opacity'];
   return ['fill-opacity'];
 };
 
@@ -63,6 +62,8 @@ const updateOpacity = (layer, keys, opacity) => {
 const setActiveLayer = (currentStyle, highlightedLayer) => {
   const style = { ...currentStyle };
   style.layers = style.layers.map(mapLayer => {
+    if (mapLayer.type === 'raster') return mapLayer;
+
     let newLayer = { ...mapLayer };
     const opacityKey = getOpacityKey(newLayer);
     if (highlightedLayer) {
