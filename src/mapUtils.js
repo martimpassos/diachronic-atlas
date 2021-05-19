@@ -20,6 +20,19 @@ const setStyleYear = (range, currentStyle) => {
         ],
       };
     }
+    if (layer.source?.match('hillshade')) {
+      const hillshades = Object.keys(style.sources)
+        .filter(s => s.match('hillshade'))
+        .sort((a, b) => parseInt(b.replace(/\D/gi, ''), 10) - parseInt(a.replace(/\D/gi, ''), 10));
+
+      const newSource = hillshades.find(h => parseInt(h.replace(/\D/gi, ''), 10) <= maxYear);
+      if (newSource) {
+        return {
+          ...layer,
+          source: newSource,
+        };
+      }
+    }
     return layer;
   });
   return style;
