@@ -1,6 +1,6 @@
 {
   "name": "@imaginerio/diachronic-atlas",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Temporally-aware Mapbox GL mapping component",
   "author": "imaginerio",
   "license": "MIT",
