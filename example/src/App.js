@@ -12,13 +12,13 @@ const App = () => {
   return (
   <Atlas 
     mapStyle={style}
-    year={1950}
+    year={1980}
     basemapHandler={ssid => console.log(ssid)} 
-    geojson={geojson}
+    // geojson={geojson}
     viewport={{
-      latitude: 29.74991,
-      longitude: -95.36026,
-      zoom: 11
+      latitude: -22.90415,
+      longitude: -43.17425,
+      zoom: 15
     }}
     viewpoints={documents}
     viewIcon={<FontAwesomeIcon icon={faCamera}/>}
