@@ -50,15 +50,7 @@ const getLineStyle = layerStyle => {
 
   return {
     children: (
-      <svg
-        x="0px"
-        y="0px"
-        width="60px"
-        height="20px"
-        viewBox="0 20 80 40"
-        enableBackground="new 0 20 80 40"
-        xmlSpace="preserve"
-      >
+      <svg x="0px" y="0px" width="40px" height="20px" viewBox="0 20 80 40">
         <path
           fill="currentColor"
           stroke="#999"
