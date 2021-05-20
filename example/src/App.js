@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
+import { ChakraProvider, Box } from "@chakra-ui/react"
 
 import { Atlas, getLegend } from 'diachronic-atlas'
 
@@ -25,7 +26,7 @@ const App = () => {
   }, [layers])
 
   return (
-    <div>
+    <ChakraProvider>
       <Atlas 
         mapStyle={style}
         year={1980}
@@ -40,8 +41,23 @@ const App = () => {
         viewIcon={<FontAwesomeIcon icon={faCamera}/>}
         circleMarkers
       />
-      <pre>{JSON.stringify(legend, null, 2)}</pre>
-    </div>
+
+      {legend && (
+        <div>
+          {legend.map(layer=>(
+            <div>
+              <p>{layer.title}</p>
+              {layer.types.map(type=>(
+                <Box>
+                  <p>{type.type}</p>
+                  <Box {...type.swatch}/>
+                </Box>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
+    </ChakraProvider>
   )
 }
 
