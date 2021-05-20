@@ -58,14 +58,14 @@ const getLineStyle = layerStyle => {
 
 const getLegend = ({ layer, type, style }) => {
   const layerStyle = getLayerStyle(layer, type, style);
-  if (!layerStyle.length) return { backgroundColor: 'white' };
-  if (layerStyle[0].paint['fill-color']) {
-    return getPolygonStyle(layerStyle);
+  let swatch = { backgroundColor: 'white' };
+  if (layerStyle[0]?.paint['fill-color']) {
+    swatch = getPolygonStyle(layerStyle);
   }
-  if (layerStyle[0].paint['line-color']) {
-    return getLineStyle(layerStyle);
+  if (layerStyle[0]?.paint['line-color']) {
+    swatch = getLineStyle(layerStyle);
   }
-  return { backgroundColor: 'white' };
+  return { type, swatch };
 };
 
 export default getLegend;
