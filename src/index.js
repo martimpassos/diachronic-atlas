@@ -147,5 +147,4 @@ Atlas.defaultProps = {
   circleMarkers: false,
 };
 
-export default Atlas;
-export { getLegend };
+export { Atlas, getLegend };

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 
-import Atlas, { getLegend } from 'diachronic-atlas'
+import { Atlas, getLegend } from 'diachronic-atlas'
 
 import style from './style.json'
 import geojson from './cone.json'
