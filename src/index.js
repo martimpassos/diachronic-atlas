@@ -91,7 +91,10 @@ const Atlas = ({
         viewIcon={viewIcon}
         circleMarkers={circleMarkers}
       />
-      <div style={{ position: 'absolute', left: 15, right: 'auto', top: 15 }}>
+      <div
+        className="atlas___zoom-controls"
+        style={{ position: 'absolute', left: 15, right: 'auto', top: 15 }}
+      >
         <NavigationControl />
       </div>
     </ReactMapGL>
