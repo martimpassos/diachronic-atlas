@@ -6,6 +6,7 @@ import ViewMarkers from './ViewMarkers';
 
 import { setStyleYear, fitBounds, setActiveLayer } from './mapUtils';
 import { requireAtLeastOne } from './utils';
+import getLegend from './getLegend';
 
 const Atlas = ({
   size,
@@ -147,3 +148,4 @@ Atlas.defaultProps = {
 };
 
 export default Atlas;
+export { getLegend };

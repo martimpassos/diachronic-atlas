@@ -55,6 +55,7 @@
   ],
   "dependencies": {
     "@turf/bbox": "^6.3.0",
+    "d3": "^6.7.0",
     "lodash": "^4.17.21",
     "react-map-gl": "5"
   },
