@@ -150,4 +150,6 @@ Atlas.defaultProps = {
   circleMarkers: false,
 };
 
+export default Atlas;
+
 export { Atlas, getLegend };
