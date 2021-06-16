@@ -17,6 +17,7 @@ const Atlas = ({
   basemapHandler,
   highlightedLayer,
   geojson,
+  hover,
   viewpoints,
   mapStyle,
   rasterUrl,
@@ -83,6 +84,11 @@ const Atlas = ({
           <Layer id="viewcone" type="fill" paint={{ 'fill-color': 'rgba(0,0,0,0.25)' }} />
         </Source>
       )}
+      {hover && (
+        <Source key="view-hover" type="geojson" data={hover}>
+          <Layer id="view-hover" type="fill" paint={{ 'fill-color': 'rgba(0,0,0,0.25)' }} />
+        </Source>
+      )}
       <ViewMarkers
         viewpoints={viewpoints}
         markerHandler={ssid => {
@@ -118,6 +124,7 @@ Atlas.propTypes = {
     height: PropTypes.number,
   }),
   geojson: PropTypes.shape(),
+  hover: PropTypes.shape(),
   viewpoints: PropTypes.arrayOf(
     PropTypes.shape({
       latitude: PropTypes.number,
@@ -143,6 +150,7 @@ Atlas.defaultProps = {
   },
   highlightedLayer: null,
   geojson: null,
+  hover: null,
   viewpoints: [],
   rasterUrl: null,
   viewIcon: null,
