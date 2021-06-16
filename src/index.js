@@ -18,6 +18,7 @@ const Atlas = ({
   highlightedLayer,
   geojson,
   hover,
+  hoverHandler,
   viewpoints,
   mapStyle,
   rasterUrl,
@@ -66,6 +67,9 @@ const Atlas = ({
       onClick={e => {
         const [feature] = e.features;
         if (feature) basemapHandler(feature.properties.ssid);
+      }}
+      onHover={e => {
+        if (e.features.length && hoverHandler) hoverHandler(e.features[0]);
       }}
       {...mapViewport}
     >
@@ -125,6 +129,7 @@ Atlas.propTypes = {
   }),
   geojson: PropTypes.shape(),
   hover: PropTypes.shape(),
+  hoverHandler: PropTypes.func,
   viewpoints: PropTypes.arrayOf(
     PropTypes.shape({
       latitude: PropTypes.number,
@@ -151,6 +156,7 @@ Atlas.defaultProps = {
   highlightedLayer: null,
   geojson: null,
   hover: null,
+  hoverHandler: null,
   viewpoints: [],
   rasterUrl: null,
   viewIcon: null,
