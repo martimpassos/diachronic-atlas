@@ -69,7 +69,11 @@ const Atlas = ({
         if (feature) basemapHandler(feature.properties.ssid);
       }}
       onHover={e => {
-        if (e.features.length && hoverHandler) hoverHandler(e.features[0]);
+        if (e.features.length) {
+          hoverHandler(e.features[0]);
+        } else {
+          hoverHandler(null);
+        }
       }}
       {...mapViewport}
     >
@@ -156,7 +160,7 @@ Atlas.defaultProps = {
   highlightedLayer: null,
   geojson: null,
   hover: null,
-  hoverHandler: null,
+  hoverHandler: () => null,
   viewpoints: [],
   rasterUrl: null,
   viewIcon: null,
