@@ -161,7 +161,7 @@ Atlas.defaultProps = {
   geojson: null,
   hover: null,
   hoverHandler: () => null,
-  viewpoints: [],
+  viewpoints: null,
   rasterUrl: null,
   viewIcon: null,
   basemapHandler: () => null,
