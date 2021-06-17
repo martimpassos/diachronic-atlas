@@ -1,5 +1,6 @@
 import bbox from '@turf/bbox';
 import { isArray } from 'lodash';
+import { hsl } from 'd3-color';
 import { WebMercatorViewport, FlyToInterpolator } from 'react-map-gl';
 
 const setStyleYear = (range, currentStyle) => {
@@ -60,7 +61,6 @@ const fitBounds = (geom, mapViewport) => {
 const getOpacityKey = layer => {
   if (layer.type === 'line') return ['line-opacity'];
   if (layer.type === 'symbol') return ['text-opacity', 'icon-opacity'];
-  if (layer.type === 'background') return ['background-opacity'];
   return ['fill-opacity'];
 };
 
@@ -75,20 +75,29 @@ const updateOpacity = (layer, keys, opacity) => {
 const setActiveLayer = (currentStyle, highlightedLayer) => {
   const style = { ...currentStyle };
   style.layers = style.layers.map(mapLayer => {
-    if (mapLayer.type === 'raster') return mapLayer;
+    if (mapLayer.type === 'raster' || mapLayer.type === 'background' || mapLayer.id === 'land') {
+      return mapLayer;
+    }
 
     let newLayer = { ...mapLayer };
-    const opacityKey = getOpacityKey(newLayer);
     if (highlightedLayer) {
+      const opacityKey = getOpacityKey(newLayer);
       const { layer, type } = highlightedLayer;
-      const layerType = newLayer.filter.find(l => l[1][1] === 'type')[2][0];
-      newLayer = updateOpacity(
-        newLayer,
-        opacityKey,
-        newLayer['source-layer'] === layer && layerType === type ? 1 : 0.2
-      );
-    } else {
-      newLayer = updateOpacity(newLayer, opacityKey, 1);
+      let activeLayer = false;
+      if (
+        newLayer.filter.find(l => l[1][1] === 'type') &&
+        newLayer.filter.find(l => l[1][1] === 'type')[2][0] === type &&
+        newLayer['source-layer'].toLowerCase() === layer.toLowerCase()
+      ) {
+        activeLayer = true;
+      }
+      newLayer = updateOpacity(newLayer, opacityKey, activeLayer ? 1 : 0.2);
+      if (newLayer['fill-color'] && activeLayer) {
+        const color = hsl(newLayer['fill-color']);
+        color.s -= 20;
+        color.l -= 20;
+        newLayer['fill-color'] = color.formatHsl();
+      }
     }
     return newLayer;
   });
