@@ -39,8 +39,9 @@ MarkerIcon.defaultProps = {
 const Circle = ({ viewpoints }) => {
   const geojson = {
     type: 'FeatureCollection',
-    features: viewpoints.map(v => ({
+    features: viewpoints.map((v, i) => ({
       type: 'Feature',
+      id: i,
       properties: {
         ssid: v.ssid,
         title: v.title,
@@ -52,11 +53,25 @@ const Circle = ({ viewpoints }) => {
     })),
   };
   return (
-    <Source type="geojson" data={geojson}>
+    <Source type="geojson" data={geojson} id="viewpoints">
       <Layer
         id="viewpoints"
         type="circle"
-        paint={{ 'circle-stroke-color': '#FFFFFF', 'circle-stroke-width': 2 }}
+        paint={{
+          'circle-color': [
+            'case',
+            ['boolean', ['feature-state', 'hover'], false],
+            '#FFFFFF',
+            '#000000',
+          ],
+          'circle-stroke-color': [
+            'case',
+            ['boolean', ['feature-state', 'hover'], false],
+            '#000000',
+            '#FFFFFF',
+          ],
+          'circle-stroke-width': 2,
+        }}
       />
     </Source>
   );

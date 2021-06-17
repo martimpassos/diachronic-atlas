@@ -32,6 +32,7 @@ const Atlas = ({
     ...viewport,
     ...size,
   });
+  const [hoveredStateId, setHoveredStateId] = useState(null);
 
   useEffect(() => {
     setMapViewport({
@@ -70,7 +71,22 @@ const Atlas = ({
         const [feature] = e.features;
         if (feature) basemapHandler(feature.properties.ssid);
       }}
-      onHover={hoverHandler}
+      onHover={e => {
+        if (hoveredStateId !== null) {
+          mapRef.current
+            .getMap()
+            .setFeatureState({ source: 'viewpoints', id: hoveredStateId }, { hover: false });
+        }
+        if (e.features.length > 0) {
+          mapRef.current
+            .getMap()
+            .setFeatureState({ source: 'viewpoints', id: e.features[0].id }, { hover: true });
+          setHoveredStateId(e.features[0].id);
+        } else {
+          setHoveredStateId(null);
+        }
+        hoverHandler(e);
+      }}
       {...mapViewport}
     >
       {rasterUrl && activeBasemap && (
