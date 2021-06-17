@@ -70,13 +70,7 @@ const Atlas = ({
         const [feature] = e.features;
         if (feature) basemapHandler(feature.properties.ssid);
       }}
-      onHover={e => {
-        if (e.features.length) {
-          hoverHandler(e.features[0]);
-        } else {
-          hoverHandler(null);
-        }
-      }}
+      onHover={hoverHandler}
       {...mapViewport}
     >
       {rasterUrl && activeBasemap && (
