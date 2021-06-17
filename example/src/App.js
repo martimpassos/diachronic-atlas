@@ -40,6 +40,7 @@ const App = () => {
         viewpoints={documents}
         viewIcon={<FontAwesomeIcon icon={faCamera}/>}
         circleMarkers
+        hoverHandler={e => console.log(e)}
       />
 
       {legend && (
