@@ -58,12 +58,14 @@ const Atlas = ({
     }
   }, [geojson]);
 
+  const interactiveLayerIds = !viewpoints || !Array.isArray(viewpoints) ? [] : ['viewpoints'];
+
   return (
     <ReactMapGL
       ref={mapRef}
       mapStyle={mapStyle}
       onViewportChange={onViewportChange}
-      interactiveLayerIds={viewpoints.lenght ? ['viewpoints'] : []}
+      interactiveLayerIds={interactiveLayerIds}
       onClick={e => {
         const [feature] = e.features;
         if (feature) basemapHandler(feature.properties.ssid);
