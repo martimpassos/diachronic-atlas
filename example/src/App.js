@@ -33,7 +33,7 @@ const App = () => {
     <ChakraProvider>
       <Atlas
         mapStyle={style}
-        year={1980}
+        year={1800}
         basemapHandler={ssid => console.log(ssid)}
         // geojson={geojson}
         viewport={{
@@ -51,7 +51,6 @@ const App = () => {
       {legend && (
         <div>
           {legend.map(layer => {
-            console.log(layer);
             return (
               <div>
                 <p>{layer.title}</p>

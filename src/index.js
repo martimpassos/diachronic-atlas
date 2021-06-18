@@ -110,6 +110,7 @@ const Atlas = ({
         </Source>
       )}
       <ViewMarkers
+        highlightedLayer={highlightedLayer}
         viewpoints={viewpoints}
         markerHandler={ssid => {
           if (ssid !== activeBasemap) basemapHandler(ssid);

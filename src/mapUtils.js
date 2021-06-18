@@ -58,30 +58,32 @@ const fitBounds = (geom, mapViewport) => {
   };
 };
 
-const getOpacityKey = layer => {
-  if (layer.type === 'line') return ['line-opacity'];
-  if (layer.type === 'symbol') return ['text-opacity', 'icon-opacity'];
-  return ['fill-opacity'];
-};
-
-const updateOpacity = (layer, keys, opacity) => {
-  const newLayer = { ...layer };
-  keys.forEach(key => {
-    newLayer.paint[key] = opacity;
-  });
-  return newLayer;
+const updateFillColor = (val, activeLayer) => {
+  const color = hsl(val);
+  if (activeLayer) {
+    color.s -= 20;
+    color.l -= 20;
+    color.opacity = 1;
+  } else {
+    color.opacity = 0.2;
+  }
+  return color.formatHsl();
 };
 
 const setActiveLayer = (currentStyle, highlightedLayer) => {
   const style = { ...currentStyle };
   style.layers = style.layers.map(mapLayer => {
-    if (mapLayer.type === 'raster' || mapLayer.type === 'background' || mapLayer.id === 'land') {
+    if (
+      mapLayer.type === 'raster' ||
+      mapLayer.type === 'background' ||
+      mapLayer.id === 'land' ||
+      mapLayer['source-layer'] === 'groundcoverpoly'
+    ) {
       return mapLayer;
     }
 
-    let newLayer = { ...mapLayer };
+    const newLayer = { ...mapLayer };
     if (highlightedLayer) {
-      const opacityKey = getOpacityKey(newLayer);
       const { layer, type } = highlightedLayer;
       let activeLayer = false;
       if (
@@ -91,12 +93,24 @@ const setActiveLayer = (currentStyle, highlightedLayer) => {
       ) {
         activeLayer = true;
       }
-      newLayer = updateOpacity(newLayer, opacityKey, activeLayer ? 1 : 0.2);
-      if (newLayer['fill-color'] && activeLayer) {
-        const color = hsl(newLayer['fill-color']);
-        color.s -= 20;
-        color.l -= 20;
-        newLayer['fill-color'] = color.formatHsl();
+
+      if (newLayer.type === 'fill') {
+        if (Array.isArray(newLayer.paint['fill-color'])) {
+          newLayer.paint['fill-color'] = newLayer.paint['fill-color'].map(val => {
+            if (val.toString().match(/^(hsl|rgb|#\d\d\d)/)) {
+              return updateFillColor(val, activeLayer);
+            }
+            return val;
+          });
+        } else {
+          newLayer.paint['fill-color'] = updateFillColor(newLayer.paint['fill-color'], activeLayer);
+        }
+      } else if (newLayer.type === 'symbol') {
+        ['text-opacity', 'icon-opacity'].forEach(prop => {
+          newLayer.paint[prop] = activeLayer ? 1 : 0.2;
+        });
+      } else if (newLayer.type === 'line') {
+        newLayer.paint['line-opacity'] = activeLayer ? 1 : 0.2;
       }
     }
     return newLayer;
