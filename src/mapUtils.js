@@ -87,6 +87,7 @@ const setActiveLayer = (currentStyle, highlightedLayer) => {
       const { layer, type } = highlightedLayer;
       let activeLayer = false;
       if (
+        newLayer.filter &&
         newLayer.filter.find(l => l[1][1] === 'type') &&
         newLayer.filter.find(l => l[1][1] === 'type')[2][0] === type &&
         newLayer['source-layer'].toLowerCase() === layer.toLowerCase()
