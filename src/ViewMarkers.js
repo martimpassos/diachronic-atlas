@@ -36,7 +36,7 @@ MarkerIcon.defaultProps = {
   viewIcon: null,
 };
 
-const Circle = ({ viewpoints, fade }) => {
+const Circle = ({ viewpoints }) => {
   const geojson = {
     type: 'FeatureCollection',
     features: viewpoints.map((v, i) => ({
@@ -71,8 +71,6 @@ const Circle = ({ viewpoints, fade }) => {
             '#FFFFFF',
           ],
           'circle-stroke-width': 2,
-          'circle-opacity': fade ? 0.2 : 1,
-          'circle-stroke-opacity': fade ? 0.2 : 1,
         }}
       />
     </Source>
@@ -81,14 +79,13 @@ const Circle = ({ viewpoints, fade }) => {
 
 Circle.propTypes = {
   viewpoints: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  fade: PropTypes.bool.isRequired,
 };
 
-const ViewMarkers = ({ viewpoints, markerHandler, viewIcon, circleMarkers, highlightedLayer }) => {
+const ViewMarkers = ({ viewpoints, markerHandler, viewIcon, circleMarkers }) => {
   if (!viewpoints || !Array.isArray(viewpoints)) return null;
 
   if (circleMarkers) {
-    return <Circle viewpoints={viewpoints} fade={highlightedLayer !== null} />;
+    return <Circle viewpoints={viewpoints} />;
   }
   return (
     <>
@@ -110,14 +107,12 @@ ViewMarkers.propTypes = {
   markerHandler: PropTypes.func,
   viewIcon: PropTypes.node,
   circleMarkers: PropTypes.bool,
-  highlightedLayer: PropTypes.shape(),
 };
 
 ViewMarkers.defaultProps = {
   viewIcon: null,
   markerHandler: () => null,
   circleMarkers: false,
-  highlightedLayer: null,
 };
 
 export default ViewMarkers;

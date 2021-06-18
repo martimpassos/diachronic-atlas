@@ -49,7 +49,7 @@ const Atlas = ({
     const map = mapRef.current.getMap();
     if (map) {
       const range = dates || [year, year];
-      map.setStyle(setActiveLayer(setStyleYear(range, mapStyle), highlightedLayer));
+      map.setStyle(setActiveLayer(setStyleYear(range, { ...mapStyle }), highlightedLayer));
     }
   }, [year, dates, highlightedLayer]);
 
@@ -59,7 +59,8 @@ const Atlas = ({
     }
   }, [geojson]);
 
-  const interactiveLayerIds = !viewpoints || !Array.isArray(viewpoints) ? [] : ['viewpoints'];
+  const interactiveLayerIds =
+    !viewpoints || !Array.isArray(viewpoints) || highlightedLayer ? [] : ['viewpoints'];
 
   return (
     <ReactMapGL
@@ -109,15 +110,16 @@ const Atlas = ({
           <Layer id="view-hover" type="fill" paint={{ 'fill-color': 'rgba(0,0,0,0.25)' }} />
         </Source>
       )}
-      <ViewMarkers
-        highlightedLayer={highlightedLayer}
-        viewpoints={viewpoints}
-        markerHandler={ssid => {
-          if (ssid !== activeBasemap) basemapHandler(ssid);
-        }}
-        viewIcon={viewIcon}
-        circleMarkers={circleMarkers}
-      />
+      {!highlightedLayer && (
+        <ViewMarkers
+          viewpoints={viewpoints}
+          markerHandler={ssid => {
+            if (ssid !== activeBasemap) basemapHandler(ssid);
+          }}
+          viewIcon={viewIcon}
+          circleMarkers={circleMarkers}
+        />
+      )}
       <div
         className="atlas___zoom-controls"
         style={{ position: 'absolute', left: 15, right: 'auto', top: 15 }}
