@@ -61,8 +61,8 @@ const fitBounds = (geom, mapViewport) => {
 const updateFillColor = (val, activeLayer) => {
   const color = hsl(val);
   if (activeLayer) {
-    color.s -= 20;
-    color.l -= 20;
+    color.s -= 0.2;
+    color.l -= 0.2;
     color.opacity = 1;
   } else {
     color.opacity = 0.2;
