@@ -1,6 +1,6 @@
 import bbox from '@turf/bbox';
 import { isArray } from 'lodash';
-import { hsl } from 'd3';
+import * as d3 from 'd3';
 import { WebMercatorViewport, FlyToInterpolator } from 'react-map-gl';
 
 const setStyleYear = (range, currentStyle) => {
@@ -59,7 +59,7 @@ const fitBounds = (geom, mapViewport) => {
 };
 
 const updateFillColor = (val, activeLayer) => {
-  const color = hsl(val);
+  const color = d3.hsl(val);
   if (activeLayer) {
     color.s -= 0.2;
     color.l -= 0.2;
