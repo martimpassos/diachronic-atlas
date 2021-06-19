@@ -1,6 +1,6 @@
 import bbox from '@turf/bbox';
 import { isArray } from 'lodash';
-import { hsl } from 'd3-color';
+import { hsl } from 'd3';
 import { WebMercatorViewport, FlyToInterpolator } from 'react-map-gl';
 
 const setStyleYear = (range, currentStyle) => {

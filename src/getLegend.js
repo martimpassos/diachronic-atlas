@@ -1,6 +1,6 @@
 import React from 'react';
 import { last, findLast } from 'lodash';
-import { rgb } from 'd3-color';
+import { rgb } from 'd3';
 
 const getLayerStyle = (layer, type, style) => {
   let layerStyle = style.layers.filter(
