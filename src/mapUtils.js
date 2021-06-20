@@ -73,12 +73,7 @@ const updateFillColor = (val, activeLayer) => {
 const setActiveLayer = (currentStyle, highlightedLayer) => {
   const style = { ...currentStyle };
   style.layers = style.layers.map(mapLayer => {
-    if (
-      mapLayer.type === 'raster' ||
-      mapLayer.type === 'background' ||
-      mapLayer.id === 'land' ||
-      mapLayer['source-layer'] === 'groundcoverpoly'
-    ) {
+    if (mapLayer.type === 'raster' || mapLayer.type === 'background' || mapLayer.id === 'land') {
       return mapLayer;
     }
 
