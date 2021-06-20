@@ -78,9 +78,9 @@ const setActiveLayer = (currentStyle, highlightedLayer) => {
     }
 
     const newLayer = { ...mapLayer };
-    let activeLayer = false;
     if (highlightedLayer) {
       const { layer, type } = highlightedLayer;
+      let activeLayer = false;
       if (
         newLayer.filter.find(l => l[1][1] === 'type') &&
         newLayer.filter.find(l => l[1][1] === 'type')[2][0] === type &&
@@ -88,25 +88,25 @@ const setActiveLayer = (currentStyle, highlightedLayer) => {
       ) {
         activeLayer = true;
       }
-    }
 
-    if (newLayer.type === 'fill') {
-      if (Array.isArray(newLayer.paint['fill-color'])) {
-        newLayer.paint['fill-color'] = newLayer.paint['fill-color'].map(val => {
-          if (val.toString().match(/^(hsl|rgb|#\d\d\d)/)) {
-            return updateFillColor(val, activeLayer);
-          }
-          return val;
+      if (newLayer.type === 'fill') {
+        if (Array.isArray(newLayer.paint['fill-color'])) {
+          newLayer.paint['fill-color'] = newLayer.paint['fill-color'].map(val => {
+            if (val.toString().match(/^(hsl|rgb|#\d\d\d)/)) {
+              return updateFillColor(val, activeLayer);
+            }
+            return val;
+          });
+        } else {
+          newLayer.paint['fill-color'] = updateFillColor(newLayer.paint['fill-color'], activeLayer);
+        }
+      } else if (newLayer.type === 'symbol') {
+        ['text-opacity', 'icon-opacity'].forEach(prop => {
+          newLayer.paint[prop] = activeLayer ? 1 : 0.2;
         });
-      } else {
-        newLayer.paint['fill-color'] = updateFillColor(newLayer.paint['fill-color'], activeLayer);
+      } else if (newLayer.type === 'line') {
+        newLayer.paint['line-opacity'] = activeLayer ? 1 : 0.2;
       }
-    } else if (newLayer.type === 'symbol') {
-      ['text-opacity', 'icon-opacity'].forEach(prop => {
-        newLayer.paint[prop] = activeLayer ? 1 : 0.2;
-      });
-    } else if (newLayer.type === 'line') {
-      newLayer.paint['line-opacity'] = activeLayer ? 1 : 0.2;
     }
     return newLayer;
   });
