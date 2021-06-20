@@ -36,7 +36,7 @@ MarkerIcon.defaultProps = {
   viewIcon: null,
 };
 
-const Circle = ({ viewpoints }) => {
+const Circle = ({ viewpoints, visible }) => {
   const geojson = {
     type: 'FeatureCollection',
     features: viewpoints.map((v, i) => ({
@@ -52,11 +52,13 @@ const Circle = ({ viewpoints }) => {
       },
     })),
   };
+
   return (
     <Source type="geojson" data={geojson} id="viewpoints">
       <Layer
         id="viewpoints"
         type="circle"
+        layout={{ visibility: visible ? 'visible' : 'none' }}
         paint={{
           'circle-color': [
             'case',
@@ -79,13 +81,18 @@ const Circle = ({ viewpoints }) => {
 
 Circle.propTypes = {
   viewpoints: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  visible: PropTypes.bool,
 };
 
-const ViewMarkers = ({ viewpoints, markerHandler, viewIcon, circleMarkers }) => {
+Circle.defaultProps = {
+  visible: true,
+};
+
+const ViewMarkers = ({ viewpoints, markerHandler, viewIcon, circleMarkers, visible }) => {
   if (!viewpoints || !Array.isArray(viewpoints)) return null;
 
   if (circleMarkers) {
-    return <Circle viewpoints={viewpoints} />;
+    return <Circle viewpoints={viewpoints} visible={visible} />;
   }
   return (
     <>
@@ -107,12 +114,14 @@ ViewMarkers.propTypes = {
   markerHandler: PropTypes.func,
   viewIcon: PropTypes.node,
   circleMarkers: PropTypes.bool,
+  visible: PropTypes.bool,
 };
 
 ViewMarkers.defaultProps = {
   viewIcon: null,
   markerHandler: () => null,
   circleMarkers: false,
+  visible: true,
 };
 
 export default ViewMarkers;
