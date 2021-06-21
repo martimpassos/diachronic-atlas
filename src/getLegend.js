@@ -1,6 +1,6 @@
 import React from 'react';
 import { last, findLast } from 'lodash';
-import * as d3 from 'd3';
+import { rgb } from 'd3';
 
 const getLayerStyle = (layer, type, style) => {
   let layerStyle = style.layers.filter(
@@ -22,7 +22,7 @@ const formatColor = bColor => {
   if (!bColor) return null;
   let color = bColor;
   if (Array.isArray(color)) color = last(color);
-  if (color.match(/^hsl/gi)) color = d3.rgb(color).formatHex();
+  if (color.match(/^hsl/gi)) color = rgb(color).formatHex();
   return color;
 };
 

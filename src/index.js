@@ -27,12 +27,14 @@ const Atlas = ({
   circleMarkers,
 }) => {
   const mapRef = useRef(null);
+  const styleRef = useRef(JSON.stringify(mapStyle));
 
   const [mapViewport, setMapViewport] = useState({
     ...viewport,
     ...size,
   });
   const [hoveredStateId, setHoveredStateId] = useState(null);
+  const [style, setStyle] = useState(mapStyle);
 
   useEffect(() => {
     setMapViewport({
@@ -49,7 +51,7 @@ const Atlas = ({
     const map = mapRef.current.getMap();
     if (map) {
       const range = dates || [year, year];
-      map.setStyle(setActiveLayer(setStyleYear(range, mapStyle), highlightedLayer));
+      setStyle(setActiveLayer(setStyleYear(range, JSON.parse(styleRef.current)), highlightedLayer));
     }
   }, [year, dates, highlightedLayer]);
 
@@ -59,14 +61,12 @@ const Atlas = ({
     }
   }, [geojson]);
 
-  const interactiveLayerIds = !viewpoints || !Array.isArray(viewpoints) ? [] : ['viewpoints'];
-
   return (
     <ReactMapGL
       ref={mapRef}
-      mapStyle={mapStyle}
+      mapStyle={style}
       onViewportChange={onViewportChange}
-      interactiveLayerIds={interactiveLayerIds}
+      interactiveLayerIds={['viewpoints']}
       onClick={e => {
         const [feature] = e.features;
         if (feature) basemapHandler(feature.properties.ssid);
@@ -110,7 +110,7 @@ const Atlas = ({
         </Source>
       )}
       <ViewMarkers
-        highlightedLayer={highlightedLayer}
+        visible={!highlightedLayer}
         viewpoints={viewpoints}
         markerHandler={ssid => {
           if (ssid !== activeBasemap) basemapHandler(ssid);

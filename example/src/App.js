@@ -55,7 +55,17 @@ const App = () => {
               <div>
                 <p>{layer.title}</p>
                 {layer.types.map(type => (
-                  <Box onClick={() => setHighlightedLayer({layer: layer.name, type: type.type})}>
+                  <Box
+                    onClick={() =>
+                      setHighlightedLayer(
+                        highlightedLayer &&
+                          layer.name === highlightedLayer.layer &&
+                          type.type === highlightedLayer.type
+                          ? null
+                          : { layer: layer.name, type: type.type }
+                      )
+                    }
+                  >
                     <p>{type.type}</p>
                     <Box {...type.swatch} />
                   </Box>

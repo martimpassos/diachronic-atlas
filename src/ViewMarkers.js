@@ -36,7 +36,7 @@ MarkerIcon.defaultProps = {
   viewIcon: null,
 };
 
-const Circle = ({ viewpoints, fade }) => {
+const Circle = ({ viewpoints, visible }) => {
   const geojson = {
     type: 'FeatureCollection',
     features: viewpoints.map((v, i) => ({
@@ -52,11 +52,13 @@ const Circle = ({ viewpoints, fade }) => {
       },
     })),
   };
+
   return (
     <Source type="geojson" data={geojson} id="viewpoints">
       <Layer
         id="viewpoints"
         type="circle"
+        layout={{ visibility: visible ? 'visible' : 'none' }}
         paint={{
           'circle-color': [
             'case',
@@ -71,8 +73,6 @@ const Circle = ({ viewpoints, fade }) => {
             '#FFFFFF',
           ],
           'circle-stroke-width': 2,
-          'circle-opacity': fade ? 0.2 : 1,
-          'circle-stroke-opacity': fade ? 0.2 : 1,
         }}
       />
     </Source>
@@ -81,14 +81,18 @@ const Circle = ({ viewpoints, fade }) => {
 
 Circle.propTypes = {
   viewpoints: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  fade: PropTypes.bool.isRequired,
+  visible: PropTypes.bool,
 };
 
-const ViewMarkers = ({ viewpoints, markerHandler, viewIcon, circleMarkers, highlightedLayer }) => {
+Circle.defaultProps = {
+  visible: true,
+};
+
+const ViewMarkers = ({ viewpoints, markerHandler, viewIcon, circleMarkers, visible }) => {
   if (!viewpoints || !Array.isArray(viewpoints)) return null;
 
   if (circleMarkers) {
-    return <Circle viewpoints={viewpoints} fade={highlightedLayer !== null} />;
+    return <Circle viewpoints={viewpoints} visible={visible} />;
   }
   return (
     <>
@@ -110,14 +114,14 @@ ViewMarkers.propTypes = {
   markerHandler: PropTypes.func,
   viewIcon: PropTypes.node,
   circleMarkers: PropTypes.bool,
-  highlightedLayer: PropTypes.shape(),
+  visible: PropTypes.bool,
 };
 
 ViewMarkers.defaultProps = {
   viewIcon: null,
   markerHandler: () => null,
   circleMarkers: false,
-  highlightedLayer: null,
+  visible: true,
 };
 
 export default ViewMarkers;

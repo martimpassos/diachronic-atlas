@@ -1,6 +1,6 @@
 import bbox from '@turf/bbox';
 import { isArray } from 'lodash';
-import * as d3 from 'd3';
+import { hsl } from 'd3';
 import { WebMercatorViewport, FlyToInterpolator } from 'react-map-gl';
 
 const setStyleYear = (range, currentStyle) => {
@@ -59,7 +59,7 @@ const fitBounds = (geom, mapViewport) => {
 };
 
 const updateFillColor = (val, activeLayer) => {
-  const color = d3.hsl(val);
+  const color = hsl(val);
   if (activeLayer) {
     color.s -= 0.2;
     color.l -= 0.2;
@@ -73,12 +73,7 @@ const updateFillColor = (val, activeLayer) => {
 const setActiveLayer = (currentStyle, highlightedLayer) => {
   const style = { ...currentStyle };
   style.layers = style.layers.map(mapLayer => {
-    if (
-      mapLayer.type === 'raster' ||
-      mapLayer.type === 'background' ||
-      mapLayer.id === 'land' ||
-      mapLayer['source-layer'] === 'groundcoverpoly'
-    ) {
+    if (mapLayer.type === 'raster' || mapLayer.type === 'background' || mapLayer.id === 'land') {
       return mapLayer;
     }
 
@@ -87,7 +82,6 @@ const setActiveLayer = (currentStyle, highlightedLayer) => {
       const { layer, type } = highlightedLayer;
       let activeLayer = false;
       if (
-        newLayer.filter &&
         newLayer.filter.find(l => l[1][1] === 'type') &&
         newLayer.filter.find(l => l[1][1] === 'type')[2][0] === type &&
         newLayer['source-layer'].toLowerCase() === layer.toLowerCase()
