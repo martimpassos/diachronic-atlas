@@ -9,7 +9,8 @@ import { requireAtLeastOne } from './utils';
 import getLegend from './getLegend';
 
 const Atlas = ({
-  size,
+  width,
+  height,
   year,
   dates,
   activeBasemap,
@@ -31,7 +32,8 @@ const Atlas = ({
 
   const [mapViewport, setMapViewport] = useState({
     ...viewport,
-    ...size,
+    width,
+    height,
   });
   const [hoveredStateId, setHoveredStateId] = useState(null);
   const [style, setStyle] = useState(mapStyle);
@@ -39,9 +41,10 @@ const Atlas = ({
   useEffect(() => {
     setMapViewport({
       ...mapViewport,
-      ...size,
+      width,
+      height,
     });
-  }, [size]);
+  }, [width, height]);
 
   const onViewportChange = nextViewport => {
     setMapViewport(nextViewport);
@@ -140,10 +143,8 @@ Atlas.propTypes = {
   opacity: PropTypes.number,
   basemapHandler: PropTypes.func,
   highlightedLayer: PropTypes.shape(),
-  size: PropTypes.shape({
-    width: PropTypes.number,
-    height: PropTypes.number,
-  }),
+  width: PropTypes.number,
+  height: PropTypes.number,
   geojson: PropTypes.shape(),
   hover: PropTypes.shape(),
   hoverHandler: PropTypes.func,
@@ -166,10 +167,8 @@ Atlas.defaultProps = {
   dates: null,
   activeBasemap: null,
   opacity: 0.75,
-  size: {
-    width: 800,
-    height: 600,
-  },
+  width: 800,
+  height: 600,
   highlightedLayer: null,
   geojson: null,
   hover: null,
