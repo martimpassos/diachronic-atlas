@@ -111,15 +111,17 @@ const Atlas = ({
           <Layer id="view-hover" type="fill" paint={{ 'fill-color': 'rgba(0,0,0,0.25)' }} />
         </Source>
       )}
-      <ViewMarkers
-        visible={!highlightedLayer}
-        viewpoints={viewpoints}
-        markerHandler={ssid => {
-          if (ssid !== activeBasemap) basemapHandler(ssid);
-        }}
-        viewIcon={viewIcon}
-        circleMarkers={circleMarkers}
-      />
+      {viewpoints && (
+        <ViewMarkers
+          visible={!highlightedLayer}
+          viewpoints={viewpoints}
+          markerHandler={ssid => {
+            if (ssid !== activeBasemap) basemapHandler(ssid);
+          }}
+          viewIcon={viewIcon}
+          circleMarkers={circleMarkers}
+        />
+      )}
       <div
         className="atlas___zoom-controls"
         style={{ position: 'absolute', left: 15, right: 'auto', top: 15 }}
