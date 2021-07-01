@@ -72,6 +72,8 @@ const Atlas = ({
         if (feature) basemapHandler(feature.properties.ssid);
       }}
       onHover={e => {
+        if (!viewpoints) return;
+
         if (hoveredStateId !== null) {
           mapRef.current
             .getMap()
