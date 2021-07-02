@@ -69,12 +69,14 @@ const Atlas = ({
       ref={mapRef}
       mapStyle={style}
       onViewportChange={onViewportChange}
-      interactiveLayerIds={['viewpoints']}
+      interactiveLayerIds={viewpoints ? ['viewpoints'] : null}
       onClick={e => {
         const [feature] = e.features;
         if (feature) basemapHandler(feature.properties.ssid);
       }}
       onHover={e => {
+        if (!viewpoints) return;
+
         if (hoveredStateId !== null) {
           mapRef.current
             .getMap()
@@ -112,15 +114,17 @@ const Atlas = ({
           <Layer id="view-hover" type="fill" paint={{ 'fill-color': 'rgba(0,0,0,0.25)' }} />
         </Source>
       )}
-      <ViewMarkers
-        visible={!highlightedLayer}
-        viewpoints={viewpoints}
-        markerHandler={ssid => {
-          if (ssid !== activeBasemap) basemapHandler(ssid);
-        }}
-        viewIcon={viewIcon}
-        circleMarkers={circleMarkers}
-      />
+      {viewpoints && (
+        <ViewMarkers
+          visible={!highlightedLayer}
+          viewpoints={viewpoints}
+          markerHandler={ssid => {
+            if (ssid !== activeBasemap) basemapHandler(ssid);
+          }}
+          viewIcon={viewIcon}
+          circleMarkers={circleMarkers}
+        />
+      )}
       <div
         className="atlas___zoom-controls"
         style={{ position: 'absolute', left: 15, right: 'auto', top: 15 }}
