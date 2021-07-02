@@ -94,6 +94,18 @@ const Atlas = ({
       }}
       {...mapViewport}
     >
+      <Source
+        type="geojson"
+        data={{
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [0, 0],
+          },
+        }}
+      >
+        <Layer id="placeholder" type="circle" paint={{ 'circle-opacity': 0 }} />
+      </Source>
       {rasterUrl && activeBasemap && (
         <Source
           key={activeBasemap}
@@ -101,7 +113,12 @@ const Atlas = ({
           tiles={[`${rasterUrl}/${activeBasemap}/{z}/{x}/{y}.png`]}
           scheme="tms"
         >
-          <Layer id="overlay" type="raster" paint={{ 'raster-opacity': opacity }} />
+          <Layer
+            id="overlay"
+            type="raster"
+            beforeId="placeholder"
+            paint={{ 'raster-opacity': opacity }}
+          />
         </Source>
       )}
       {geojson && !activeBasemap && (
@@ -114,17 +131,15 @@ const Atlas = ({
           <Layer id="view-hover" type="fill" paint={{ 'fill-color': 'rgba(0,0,0,0.25)' }} />
         </Source>
       )}
-      {viewpoints && (
-        <ViewMarkers
-          visible={!highlightedLayer}
-          viewpoints={viewpoints}
-          markerHandler={ssid => {
-            if (ssid !== activeBasemap) basemapHandler(ssid);
-          }}
-          viewIcon={viewIcon}
-          circleMarkers={circleMarkers}
-        />
-      )}
+      <ViewMarkers
+        visible={!highlightedLayer}
+        viewpoints={viewpoints}
+        markerHandler={ssid => {
+          if (ssid !== activeBasemap) basemapHandler(ssid);
+        }}
+        viewIcon={viewIcon}
+        circleMarkers={circleMarkers}
+      />
       <div
         className="atlas___zoom-controls"
         style={{ position: 'absolute', left: 15, right: 'auto', top: 15 }}

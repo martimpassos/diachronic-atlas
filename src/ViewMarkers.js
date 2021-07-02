@@ -110,7 +110,7 @@ const ViewMarkers = ({ viewpoints, markerHandler, viewIcon, circleMarkers, visib
 };
 
 ViewMarkers.propTypes = {
-  viewpoints: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  viewpoints: PropTypes.arrayOf(PropTypes.shape()),
   markerHandler: PropTypes.func,
   viewIcon: PropTypes.node,
   circleMarkers: PropTypes.bool,
@@ -118,6 +118,7 @@ ViewMarkers.propTypes = {
 };
 
 ViewMarkers.defaultProps = {
+  viewpoints: [],
   viewIcon: null,
   markerHandler: () => null,
   circleMarkers: false,

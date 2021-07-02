@@ -46,6 +46,8 @@ const App = () => {
         circleMarkers
         hoverHandler={e => console.log(e)}
         highlightedLayer={highlightedLayer}
+        rasterUrl="https://imaginerio-rasters.s3.us-east-1.amazonaws.com"
+        activeBasemap="24048803"
       />
 
       {legend && (
