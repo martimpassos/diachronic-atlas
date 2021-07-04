@@ -4,7 +4,7 @@ import ReactMapGL, { Source, Layer, NavigationControl } from 'react-map-gl';
 
 import ViewMarkers from './ViewMarkers';
 
-import { setStyleYear, fitBounds, setActiveLayer } from './mapUtils';
+import { setStyleYear, fitBounds, setActiveLayer, updateBearing } from './mapUtils';
 import { requireAtLeastOne } from './utils';
 import getLegend from './getLegend';
 
@@ -26,6 +26,7 @@ const Atlas = ({
   viewIcon,
   viewport,
   circleMarkers,
+  bearing,
 }) => {
   const mapRef = useRef(null);
   const styleRef = useRef(JSON.stringify(mapStyle));
@@ -63,6 +64,8 @@ const Atlas = ({
       setMapViewport(fitBounds(geojson, mapViewport));
     }
   }, [geojson]);
+
+  useEffect(() => setMapViewport(updateBearing(bearing, mapViewport)), [bearing]);
 
   return (
     <ReactMapGL
@@ -179,6 +182,7 @@ Atlas.propTypes = {
   viewIcon: PropTypes.node,
   viewport: PropTypes.shape().isRequired,
   circleMarkers: PropTypes.bool,
+  bearing: PropTypes.number,
 };
 
 Atlas.defaultProps = {
@@ -197,6 +201,7 @@ Atlas.defaultProps = {
   viewIcon: null,
   basemapHandler: () => null,
   circleMarkers: false,
+  bearing: 0,
 };
 
 export default Atlas;

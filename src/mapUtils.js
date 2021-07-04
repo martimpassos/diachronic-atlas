@@ -58,6 +58,14 @@ const fitBounds = (geom, mapViewport) => {
   };
 };
 
+const updateBearing = (bearing, mapViewport) => ({
+  ...mapViewport,
+  bearing,
+  pitch: bearing ? 40 : 0,
+  transitionDuration: 1000,
+  transitionInterpolator: new FlyToInterpolator(),
+});
+
 const updateFillColor = (val, activeLayer) => {
   const color = hsl(val);
   if (activeLayer) {
@@ -113,4 +121,4 @@ const setActiveLayer = (currentStyle, highlightedLayer) => {
   return style;
 };
 
-export { setStyleYear, fitBounds, setActiveLayer };
+export { setStyleYear, fitBounds, setActiveLayer, updateBearing };

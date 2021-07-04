@@ -14,6 +14,11 @@ const App = () => {
   const [layers, setLayers] = useState(null);
   const [legend, setLegend] = useState(null);
   const [highlightedLayer, setHighlightedLayer] = useState(null);
+  const [heading, setHeading] = useState(0);
+
+  setTimeout(() => {
+    setHeading(90);
+  }, 3000);
 
   if (!layers)
     axios.get('https://search.imaginerio.org/layers/').then(({ data }) => setLayers(data));
@@ -48,6 +53,7 @@ const App = () => {
         highlightedLayer={highlightedLayer}
         rasterUrl="https://imaginerio-rasters.s3.us-east-1.amazonaws.com"
         activeBasemap="24048803"
+        bearing={heading}
       />
 
       {legend && (
