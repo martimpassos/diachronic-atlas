@@ -7,7 +7,7 @@ import { ChakraProvider, Box } from '@chakra-ui/react';
 import { Atlas, getLegend } from 'diachronic-atlas';
 
 import style from './style.json';
-import geojson from './cone.json';
+import cone from './cone.json';
 import documents from './documents.json';
 
 const App = () => {
@@ -15,9 +15,10 @@ const App = () => {
   const [legend, setLegend] = useState(null);
   const [highlightedLayer, setHighlightedLayer] = useState(null);
   const [heading, setHeading] = useState(0);
+  const [geojson, setGeoJson] = useState([]);
 
   setTimeout(() => {
-    setHeading(90);
+    setGeoJson([{id: 'testjson', data: cone}]);
   }, 3000);
 
   if (!layers)
@@ -40,7 +41,7 @@ const App = () => {
         mapStyle={style}
         year={1800}
         basemapHandler={ssid => console.log(ssid)}
-        // geojson={geojson}
+        geojson={geojson}
         viewport={{
           latitude: -22.90415,
           longitude: -43.17425,
@@ -52,7 +53,7 @@ const App = () => {
         hoverHandler={e => console.log(e)}
         highlightedLayer={highlightedLayer}
         rasterUrl="https://imaginerio-rasters.s3.us-east-1.amazonaws.com"
-        activeBasemap="24048803"
+        // activeBasemap="24048803"
         bearing={heading}
       />
 
@@ -60,10 +61,11 @@ const App = () => {
         <div>
           {legend.map(layer => {
             return (
-              <div>
+              <div key={layer.name}>
                 <p>{layer.title}</p>
                 {layer.types.map(type => (
                   <Box
+                    key={type.type}
                     onClick={() =>
                       setHighlightedLayer(
                         highlightedLayer &&

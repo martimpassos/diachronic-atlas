@@ -29,6 +29,7 @@ const Atlas = ({
   bearing,
 }) => {
   const mapRef = useRef(null);
+  const geoRef = useRef(null);
   const styleRef = useRef(JSON.stringify(mapStyle));
 
   const [mapViewport, setMapViewport] = useState({
@@ -60,9 +61,12 @@ const Atlas = ({
   }, [year, dates, highlightedLayer]);
 
   useEffect(() => {
-    if (geojson) {
-      setMapViewport(fitBounds(geojson, mapViewport));
-    }
+    geojson.forEach(({ id, data }) => {
+      if (geoRef.current !== id) {
+        setMapViewport(fitBounds(data, mapViewport));
+        geoRef.current = id;
+      }
+    });
   }, [geojson]);
 
   useEffect(() => setMapViewport(updateBearing(bearing, mapViewport)), [bearing]);
@@ -124,11 +128,11 @@ const Atlas = ({
           />
         </Source>
       )}
-      {geojson && !activeBasemap && (
-        <Source key={`view${activeBasemap}`} type="geojson" data={geojson}>
-          <Layer id="viewcone" type="fill" paint={{ 'fill-color': 'rgba(0,0,0,0.25)' }} />
+      {geojson.map(({ id, data, paint }) => (
+        <Source key={id} type="geojson" data={data}>
+          <Layer id={id} type="fill" paint={paint || { 'fill-color': 'rgba(0,0,0,0.25)' }} />
         </Source>
-      )}
+      ))}
       {hover && (
         <Source key="view-hover" type="geojson" data={hover}>
           <Layer id="view-hover" type="fill" paint={{ 'fill-color': 'rgba(0,0,0,0.25)' }} />
@@ -167,7 +171,13 @@ Atlas.propTypes = {
   highlightedLayer: PropTypes.shape(),
   width: PropTypes.number,
   height: PropTypes.number,
-  geojson: PropTypes.shape(),
+  geojson: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      data: PropTypes.shape().isRequired,
+      paint: PropTypes.shape(),
+    })
+  ),
   hover: PropTypes.shape(),
   hoverHandler: PropTypes.func,
   viewpoints: PropTypes.arrayOf(
@@ -193,7 +203,7 @@ Atlas.defaultProps = {
   width: 800,
   height: 600,
   highlightedLayer: null,
-  geojson: null,
+  geojson: [],
   hover: null,
   hoverHandler: () => null,
   viewpoints: null,
