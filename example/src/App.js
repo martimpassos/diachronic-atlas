@@ -18,7 +18,7 @@ const App = () => {
   const [geojson, setGeoJson] = useState([]);
 
   setTimeout(() => {
-    setGeoJson([{id: 'testjson', data: cone}]);
+    setGeoJson([{id: 'testjson', data: cone, paint: { 'fill-color': 'rgba(0,0,0,0.25)' }}]);
   }, 3000);
 
   if (!layers)
