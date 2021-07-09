@@ -128,9 +128,13 @@ const Atlas = ({
           />
         </Source>
       )}
-      {geojson.map(({ id, data, paint }) => (
+      {geojson.map(({ id, data, paint, type }) => (
         <Source key={id} type="geojson" data={data}>
-          <Layer id={id} type="fill" paint={paint || { 'fill-color': 'rgba(0,0,0,0.25)' }} />
+          <Layer
+            id={id}
+            type={type || 'fill'}
+            paint={paint || { 'fill-color': 'rgba(0,0,0,0.25)' }}
+          />
         </Source>
       ))}
       {hover && (
@@ -175,6 +179,7 @@ Atlas.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       data: PropTypes.shape().isRequired,
+      type: PropTypes.oneOf(['fill', 'line', 'circle', 'symbol']),
       paint: PropTypes.shape(),
     })
   ),
