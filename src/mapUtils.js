@@ -39,7 +39,7 @@ const setStyleYear = (range, currentStyle) => {
   return style;
 };
 
-const fitBounds = (geom, mapViewport) => {
+const fitBounds = (geom, mapViewport, minZoom, maxZoom) => {
   const [minX, minY, maxX, maxY] = bbox(geom);
   const { longitude, latitude, zoom } = new WebMercatorViewport(mapViewport).fitBounds(
     [
@@ -52,7 +52,7 @@ const fitBounds = (geom, mapViewport) => {
     ...mapViewport,
     longitude,
     latitude,
-    zoom,
+    zoom: Math.max(minZoom, Math.min(zoom, maxZoom)),
     transitionDuration: 1000,
     transitionInterpolator: new FlyToInterpolator(),
   };

@@ -66,7 +66,7 @@ const Atlas = ({
   useEffect(() => {
     geojson.forEach(({ id, data }) => {
       if (geoRef.current !== id) {
-        setMapViewport(fitBounds(data, mapViewport));
+        setMapViewport(fitBounds(data, mapViewport, minZoom, maxZoom));
         geoRef.current = id;
       }
     });
