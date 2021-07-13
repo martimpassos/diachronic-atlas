@@ -27,6 +27,8 @@ const Atlas = ({
   viewport,
   circleMarkers,
   bearing,
+  minZoom,
+  maxZoom,
 }) => {
   const mapRef = useRef(null);
   const geoRef = useRef(null);
@@ -49,7 +51,8 @@ const Atlas = ({
   }, [width, height]);
 
   const onViewportChange = nextViewport => {
-    setMapViewport(nextViewport);
+    const zoom = Math.max(minZoom, Math.min(nextViewport.zoom, maxZoom));
+    setMapViewport({ ...nextViewport, zoom });
   };
 
   useEffect(() => {
@@ -194,6 +197,8 @@ Atlas.propTypes = {
   viewport: PropTypes.shape().isRequired,
   circleMarkers: PropTypes.bool,
   bearing: PropTypes.number,
+  minZoom: PropTypes.number,
+  maxZoom: PropTypes.number,
 };
 
 Atlas.defaultProps = {
@@ -213,6 +218,8 @@ Atlas.defaultProps = {
   basemapHandler: () => null,
   circleMarkers: false,
   bearing: 0,
+  minZoom: 9,
+  maxZoom: 17,
 };
 
 export default Atlas;
