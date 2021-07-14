@@ -43,16 +43,19 @@ const Atlas = ({
   const [style, setStyle] = useState(mapStyle);
 
   useEffect(() => {
+    const { zoom } = mapViewport;
     setMapViewport({
       ...mapViewport,
+      zoom: Math.max(minZoom, Math.min(zoom, maxZoom)),
       width,
       height,
     });
   }, [width, height]);
 
   const onViewportChange = nextViewport => {
-    const zoom = Math.max(minZoom, Math.min(nextViewport.zoom, maxZoom));
-    setMapViewport({ ...nextViewport, zoom });
+    // eslint-disable-next-line no-param-reassign
+    nextViewport.zoom = Math.max(minZoom, Math.min(nextViewport.zoom, maxZoom));
+    setMapViewport(nextViewport);
   };
 
   useEffect(() => {
@@ -63,6 +66,8 @@ const Atlas = ({
     }
   }, [year, dates, highlightedLayer]);
 
+  useEffect(() => setMapViewport(updateBearing(bearing, mapViewport)), [bearing]);
+
   useEffect(() => {
     geojson.forEach(({ id, data }) => {
       if (geoRef.current !== id) {
@@ -71,8 +76,6 @@ const Atlas = ({
       }
     });
   }, [geojson]);
-
-  useEffect(() => setMapViewport(updateBearing(bearing, mapViewport)), [bearing]);
 
   return (
     <ReactMapGL

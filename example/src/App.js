@@ -15,11 +15,11 @@ const App = () => {
   const [legend, setLegend] = useState(null);
   const [highlightedLayer, setHighlightedLayer] = useState(null);
   const [heading, setHeading] = useState(0);
-  const [geojson, setGeoJson] = useState([]);
+  const [geojson, setGeoJson] = useState([{id: 'asdlkjldlkj', data: cone, paint: { 'fill-color': 'rgba(0,0,0,0.25)' }}]);
 
-  setTimeout(() => {
-    setGeoJson([{id: 'testjson', data: cone, paint: { 'fill-color': 'rgba(0,0,0,0.25)' }}]);
-  }, 3000);
+  // setTimeout(() => {
+  //   setGeoJson([{id: 'testjson', data: cone, paint: { 'fill-color': 'rgba(0,0,0,0.25)' }}]);
+  // }, 3000);
 
   if (!layers)
     axios.get('https://search.imaginerio.org/layers/').then(({ data }) => setLayers(data));
