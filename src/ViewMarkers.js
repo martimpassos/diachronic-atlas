@@ -54,8 +54,9 @@ const Circle = ({ viewpoints, visible }) => {
   };
 
   return (
-    <Source type="geojson" data={geojson} id="viewpoints">
+    <Source type="geojson" data={geojson} id="viewpoints" key="viewpoints">
       <Layer
+        key="viewpoints"
         id="viewpoints"
         type="circle"
         layout={{ visibility: visible ? 'visible' : 'none' }}

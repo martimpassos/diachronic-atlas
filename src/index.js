@@ -108,6 +108,7 @@ const Atlas = ({
       {...mapViewport}
     >
       <Source
+        key="placeholder-source"
         type="geojson"
         data={{
           type: 'Feature',
