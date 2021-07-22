@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactMapGL, { Source, Layer, NavigationControl } from 'react-map-gl';
+import bboxPolygon from '@turf/bbox-polygon';
 
 import ViewMarkers from './ViewMarkers';
 
@@ -29,6 +30,8 @@ const Atlas = ({
   bearing,
   minZoom,
   maxZoom,
+  isDrawing,
+  drawBoxHandler,
 }) => {
   const mapRef = useRef(null);
   const geoRef = useRef(null);
@@ -41,6 +44,9 @@ const Atlas = ({
   });
   const [hoveredStateId, setHoveredStateId] = useState(null);
   const [style, setStyle] = useState(mapStyle);
+  const [drawBoxStart, setDrawBoxStart] = useState(null);
+  const [drawBoxEnd, setDrawBoxEnd] = useState(null);
+  const [drawBoxGeojson, setDrawBoxGeojson] = useState(null);
 
   useEffect(() => {
     const { zoom } = mapViewport;
@@ -77,6 +83,19 @@ const Atlas = ({
     });
   }, [geojson]);
 
+  useEffect(() => {
+    if (drawBoxStart && drawBoxEnd) {
+      setDrawBoxGeojson(
+        bboxPolygon([
+          Math.min(drawBoxStart[0], drawBoxEnd[0]),
+          Math.min(drawBoxStart[1], drawBoxEnd[1]),
+          Math.max(drawBoxStart[0], drawBoxEnd[0]),
+          Math.max(drawBoxStart[1], drawBoxEnd[1]),
+        ])
+      );
+    }
+  }, [drawBoxStart, drawBoxEnd]);
+
   return (
     <ReactMapGL
       ref={mapRef}
@@ -86,6 +105,20 @@ const Atlas = ({
       onClick={e => {
         const [feature] = e.features;
         if (feature) basemapHandler(feature.properties.ssid);
+        if (isDrawing && !drawBoxStart) {
+          setDrawBoxStart(e.lngLat);
+        }
+        if (isDrawing && drawBoxStart) {
+          drawBoxHandler([drawBoxStart, drawBoxEnd]);
+          setDrawBoxStart(null);
+          setDrawBoxEnd(null);
+          setDrawBoxGeojson(null);
+        }
+      }}
+      onMouseMove={e => {
+        if (isDrawing && drawBoxStart) {
+          setDrawBoxEnd(e.lngLat);
+        }
       }}
       onHover={e => {
         if (!viewpoints) return;
@@ -154,6 +187,12 @@ const Atlas = ({
         viewIcon={viewIcon}
         circleMarkers={circleMarkers}
       />
+      {isDrawing && drawBoxGeojson && (
+        <Source key="draw-box" type="geojson" data={drawBoxGeojson}>
+          <Layer type="fill" id="draw-box-fill" paint={{ 'fill-color': 'rgba(0,0,0,0.25)' }} />
+          <Layer type="line" id="draw-box-line" paint={{ 'line-width': 2 }} />
+        </Source>
+      )}
       <div
         className="atlas___zoom-controls"
         style={{ position: 'absolute', left: 15, right: 'auto', top: 15 }}
@@ -203,6 +242,8 @@ Atlas.propTypes = {
   bearing: PropTypes.number,
   minZoom: PropTypes.number,
   maxZoom: PropTypes.number,
+  isDrawing: PropTypes.bool,
+  drawBoxHandler: PropTypes.func,
 };
 
 Atlas.defaultProps = {
@@ -224,6 +265,8 @@ Atlas.defaultProps = {
   bearing: 0,
   minZoom: 9,
   maxZoom: 17,
+  isDrawing: false,
+  drawBoxHandler: () => null,
 };
 
 export default Atlas;
