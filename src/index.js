@@ -102,12 +102,22 @@ const Atlas = ({
       mapStyle={style}
       onViewportChange={onViewportChange}
       interactiveLayerIds={viewpoints ? ['viewpoints'] : null}
+      dragPan={!isDrawing}
+      getCursor={({ isHovering, isDragging }) => {
+        if (isDrawing || isHovering) return 'pointer';
+        if (isDragging) return 'grabbing';
+        return 'grab';
+      }}
       onClick={e => {
         const [feature] = e.features;
         if (feature) basemapHandler(feature.properties.ssid);
-        if (isDrawing && !drawBoxStart) {
+      }}
+      onMouseDown={e => {
+        if (isDrawing) {
           setDrawBoxStart(e.lngLat);
         }
+      }}
+      onMouseUp={() => {
         if (isDrawing && drawBoxStart) {
           drawBoxHandler([drawBoxStart, drawBoxEnd]);
           setDrawBoxStart(null);
