@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import ReactMapGL, { Source, Layer, NavigationControl } from 'react-map-gl';
+import ReactMapGL, { Source, Layer, NavigationControl, WebMercatorViewport } from 'react-map-gl';
 import bboxPolygon from '@turf/bbox-polygon';
 
 import ViewMarkers from './ViewMarkers';
@@ -32,6 +32,7 @@ const Atlas = ({
   maxZoom,
   isDrawing,
   drawBoxHandler,
+  bboxHandler,
 }) => {
   const mapRef = useRef(null);
   const geoRef = useRef(null);
@@ -62,6 +63,7 @@ const Atlas = ({
     // eslint-disable-next-line no-param-reassign
     nextViewport.zoom = Math.max(minZoom, Math.min(nextViewport.zoom, maxZoom));
     setMapViewport(nextViewport);
+    bboxHandler(new WebMercatorViewport(nextViewport).getBounds());
   };
 
   useEffect(() => {
@@ -254,6 +256,7 @@ Atlas.propTypes = {
   maxZoom: PropTypes.number,
   isDrawing: PropTypes.bool,
   drawBoxHandler: PropTypes.func,
+  bboxHandler: PropTypes.func,
 };
 
 Atlas.defaultProps = {
@@ -277,6 +280,7 @@ Atlas.defaultProps = {
   maxZoom: 17,
   isDrawing: false,
   drawBoxHandler: () => null,
+  bboxHandler: () => null,
 };
 
 export default Atlas;

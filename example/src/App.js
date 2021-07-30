@@ -55,7 +55,8 @@ const App = () => {
         rasterUrl="https://imaginerio-rasters.s3.us-east-1.amazonaws.com"
         // activeBasemap="24048803"
         bearing={heading}
-        isDrawing
+        // isDrawing
+        bboxHandler={e => console.log(e)}
       />
 
       {legend && (
