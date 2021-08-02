@@ -56,6 +56,7 @@ const App = () => {
         // activeBasemap="24048803"
         bearing={heading}
         // isDrawing
+        clickHandler={e => console.log(e)}
         bboxHandler={e => console.log(e)}
       />
 

@@ -33,6 +33,7 @@ const Atlas = ({
   isDrawing,
   drawBoxHandler,
   bboxHandler,
+  clickHandler,
 }) => {
   const mapRef = useRef(null);
   const geoRef = useRef(null);
@@ -111,6 +112,7 @@ const Atlas = ({
         return 'grab';
       }}
       onClick={e => {
+        clickHandler(e.lngLat);
         const [feature] = e.features;
         if (feature) basemapHandler(feature.properties.ssid);
       }}
@@ -257,6 +259,7 @@ Atlas.propTypes = {
   isDrawing: PropTypes.bool,
   drawBoxHandler: PropTypes.func,
   bboxHandler: PropTypes.func,
+  clickHandler: PropTypes.func,
 };
 
 Atlas.defaultProps = {
@@ -281,6 +284,7 @@ Atlas.defaultProps = {
   isDrawing: false,
   drawBoxHandler: () => null,
   bboxHandler: () => null,
+  clickHandler: () => null,
 };
 
 export default Atlas;
