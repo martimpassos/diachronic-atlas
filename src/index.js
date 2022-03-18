@@ -1,6 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import ReactMapGL, { Source, Layer, NavigationControl, WebMercatorViewport } from 'react-map-gl';
+import ReactMapGL, {
+  Source,
+  Layer,
+  NavigationControl,
+  WebMercatorViewport,
+  AttributionControl,
+} from 'react-map-gl';
 import bboxPolygon from '@turf/bbox-polygon';
 
 import ViewMarkers from './ViewMarkers';
@@ -19,6 +25,7 @@ const Atlas = ({
   basemapHandler,
   highlightedLayer,
   geojson,
+  showSatellite,
   hover,
   hoverHandler,
   viewpoints,
@@ -167,6 +174,27 @@ const Atlas = ({
       >
         <Layer id="placeholder" type="circle" paint={{ 'circle-opacity': 0 }} />
       </Source>
+      {showSatellite && (
+        <Source
+          id="satellite"
+          type="raster"
+          tiles={[
+            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+          ]}
+        >
+          <Layer id="satellite" type="raster" beforeId="placeholder" />
+        </Source>
+      )}
+      {showSatellite && (
+        <AttributionControl
+          compact
+          customAttribution="Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
+          style={{
+            bottom: 0,
+            left: 0,
+          }}
+        />
+      )}
       {rasterUrl && activeBasemap && (
         <Source
           key={activeBasemap}
@@ -239,6 +267,7 @@ Atlas.propTypes = {
       paint: PropTypes.shape(),
     })
   ),
+  showSatellite: PropTypes.bool,
   hover: PropTypes.shape(),
   hoverHandler: PropTypes.func,
   viewpoints: PropTypes.arrayOf(
@@ -271,6 +300,7 @@ Atlas.defaultProps = {
   height: 600,
   highlightedLayer: null,
   geojson: [],
+  showSatellite: false,
   hover: null,
   hoverHandler: () => null,
   viewpoints: null,

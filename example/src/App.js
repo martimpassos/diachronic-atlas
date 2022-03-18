@@ -22,7 +22,7 @@ const App = () => {
   // }, 3000);
 
   if (!layers)
-    axios.get('https://search.imaginerio.org/layers/').then(({ data }) => setLayers(data));
+    axios.get('https://search.imaginerio.org/layers/').then(({ data }) => setLayers(data[0].layers));
 
   useEffect(() => {
     if (layers) {
@@ -47,6 +47,7 @@ const App = () => {
           longitude: -43.17425,
           zoom: 15,
         }}
+        showSatellite
         viewpoints={documents}
         viewIcon={<FontAwesomeIcon icon={faCamera} />}
         circleMarkers
