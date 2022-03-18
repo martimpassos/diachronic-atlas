@@ -73,7 +73,9 @@ const Circle = ({ viewpoints, visible }) => {
             '#000000',
             '#FFFFFF',
           ],
-          'circle-stroke-width': 2,
+          'circle-radius': ['interpolate', ['exponential', 1.5], ['zoom'], 13, 2, 17, 5],
+          'circle-opacity': ['interpolate', ['exponential', 1.5], ['zoom'], 13, 0.75, 17, 1],
+          'circle-stroke-width': ['interpolate', ['exponential', 1.5], ['zoom'], 13, 0.5, 17, 2],
         }}
       />
     </Source>

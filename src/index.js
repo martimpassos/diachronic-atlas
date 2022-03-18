@@ -27,6 +27,7 @@ const Atlas = ({
   geojson,
   showSatellite,
   hover,
+  loadHandler,
   hoverHandler,
   viewpoints,
   mapStyle,
@@ -118,6 +119,7 @@ const Atlas = ({
         if (isDragging) return 'grabbing';
         return 'grab';
       }}
+      onLoad={loadHandler}
       onClick={e => {
         clickHandler(e.lngLat);
         const [feature] = e.features;
@@ -267,6 +269,7 @@ Atlas.propTypes = {
       paint: PropTypes.shape(),
     })
   ),
+  loadHandler: PropTypes.func,
   showSatellite: PropTypes.bool,
   hover: PropTypes.shape(),
   hoverHandler: PropTypes.func,
@@ -303,6 +306,7 @@ Atlas.defaultProps = {
   showSatellite: false,
   hover: null,
   hoverHandler: () => null,
+  loadHandler: () => null,
   viewpoints: null,
   rasterUrl: null,
   viewIcon: null,
