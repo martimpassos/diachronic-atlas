@@ -38,6 +38,7 @@ const Atlas = ({
   bearing,
   minZoom,
   maxZoom,
+  maxBounds,
   isDrawing,
   drawBoxHandler,
   bboxHandler,
@@ -288,6 +289,10 @@ Atlas.propTypes = {
   bearing: PropTypes.number,
   minZoom: PropTypes.number,
   maxZoom: PropTypes.number,
+  maxBounds: PropTypes.arrayOf(
+    PropTypes.arrayOf(PropTypes.number),
+    PropTypes.arrayOf(PropTypes.number),
+  ),
   isDrawing: PropTypes.bool,
   drawBoxHandler: PropTypes.func,
   bboxHandler: PropTypes.func,
@@ -315,6 +320,10 @@ Atlas.defaultProps = {
   bearing: 0,
   minZoom: 9,
   maxZoom: 17,
+  maxBounds: [
+    [-44.030211, -23.114774],
+    [-42.696978, -22.491304]
+  ],
   isDrawing: false,
   drawBoxHandler: () => null,
   bboxHandler: () => null,
